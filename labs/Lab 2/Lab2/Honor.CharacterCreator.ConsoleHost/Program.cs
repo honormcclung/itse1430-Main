@@ -4,6 +4,7 @@
  * ITSE 1430 
  * Lab 2
  * Honor McClung
+ * Date: 10/21/22
  */
 
 using Honor.CharacterCreator.ConsoleHost;
@@ -250,8 +251,11 @@ void HandleDeleteCharacter ()
         Console.WriteLine("Error. No Character has been made.");
     } else
     {
-        Console.WriteLine("Character has been deleted.");
-        userHasMadeCharacter = false;
+        if (Confirm("Are you sure you want to delete character? (Y/N)"))
+        {
+            Console.WriteLine("Character has been deleted.");
+            userHasMadeCharacter = false;
+        }
     }
 }
 #endregion
