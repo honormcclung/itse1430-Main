@@ -182,55 +182,55 @@ void HandleEditCharacter ()
     if (userHasMadeCharacter == true)
     {
         DrawTableRow("Current Name: ", 3, characterOne.Name);
-        if (Confirm("Are you sure you want to edit name?"))
+        if (Confirm("Are you sure you want to edit name? (Y/N)"))
         {
             SetName();
         }
 
         DrawTableRow("Current Race: ", 3, characterOne.Name);
-        if (Confirm("Are you sure you want to edit race?"))
+        if (Confirm("Are you sure you want to edit race? (Y/N)"))
         {
             SelectRace();
         }
 
         DrawTableRow("Current Profession: ", 3, characterOne.Profession);
-        if (Confirm("Are you sure you want to edit profession?"))
+        if (Confirm("Are you sure you want to edit profession? (Y/N)"))
         {
             SelectProfession();
         }
 
         DrawTableRow("Current Biography: ", 3, characterOne.Biography);
-        if (Confirm("Are you sure you want to edit biography?"))
+        if (Confirm("Are you sure you want to edit biography? (Y/N)"))
         {
             SetBiography();
         }
 
         DrawTableRow("Current Strength: ", 3, characterOne.Strength.ToString());
-        if (Confirm("Are you sure you want to edit strength?"))
+        if (Confirm("Are you sure you want to edit strength? (Y/N)"))
         {
             SetStrength();
         }
 
         DrawTableRow("Current Intelligence: ", 3, characterOne.Intellingence.ToString());
-        if (Confirm("Are you sure you want to edit intelligence?"))
+        if (Confirm("Are you sure you want to edit intelligence? (Y/N)"))
         {
             SetIntelligence();
         }
 
         DrawTableRow("Current Agility: ", 3, characterOne.Agility.ToString());
-        if (Confirm("Are you sure you want to edit agility?"))
+        if (Confirm("Are you sure you want to edit agility? (Y/N)"))
         {
             SetAgility();
         }
 
         DrawTableRow("Current constitution: ", 3, characterOne.Constitution.ToString());
-        if (Confirm("Are you sure you want to edit constitution?"))
+        if (Confirm("Are you sure you want to edit constitution? (Y/N)"))
         {
             SetConstitution();
         }
 
         DrawTableRow("Current Charisma: ", 3, characterOne.Charisma.ToString());
-        if (Confirm("Are you sure you want to edit charisma?"))
+        if (Confirm("Are you sure you want to edit charisma? (Y/N)"))
         {
             SetCharisma();
         }
