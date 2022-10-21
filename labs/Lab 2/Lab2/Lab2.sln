@@ -5,6 +5,8 @@ VisualStudioVersion = 17.3.32825.248
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Honor.CharacterCreator.ConsoleHost", "Honor.CharacterCreator.ConsoleHost\Honor.CharacterCreator.ConsoleHost.csproj", "{F57F6FDA-0EFB-4859-931C-563CB6E3CADA}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Honor.CharacterCreator", "Honor.CharacterCreator\Honor.CharacterCreator.csproj", "{AC007B4B-1B49-423A-94A5-1FFE070545F1}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{F57F6FDA-0EFB-4859-931C-563CB6E3CADA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F57F6FDA-0EFB-4859-931C-563CB6E3CADA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F57F6FDA-0EFB-4859-931C-563CB6E3CADA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AC007B4B-1B49-423A-94A5-1FFE070545F1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AC007B4B-1B49-423A-94A5-1FFE070545F1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AC007B4B-1B49-423A-94A5-1FFE070545F1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AC007B4B-1B49-423A-94A5-1FFE070545F1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

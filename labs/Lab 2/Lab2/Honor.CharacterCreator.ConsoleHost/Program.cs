@@ -6,6 +6,9 @@
  * Honor McClung
  */
 
+using Honor.CharacterCreator.ConsoleHost;
+using Honor.CharacterCreator;
+
 DisplayProgramInformation();
 
 Character characterOne = new Character("-1", "-1", "-1", "-1", -1, -1, -1, -1, -1);
