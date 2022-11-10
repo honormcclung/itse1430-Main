@@ -167,7 +167,7 @@ namespace WinFormsApp2
         //}
 
         private Movie GetSelectedMovie ()
-        {
+        {     
             //var allTextBoxes = Controls.OfType<TextBox>();
             //IEnumerable<Movie> temp = _lstMovies.SelectedItems.OfType<Movie>();
 
