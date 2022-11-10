@@ -13,7 +13,7 @@
         ///   - Movie is not valid
         ///   - Movie title already exists
         /// </remarks>
-        Movie Add ( Movie movie, out string errorMessage );
+        Movie Add ( Movie movie );
 
         /// <summary>Gets a movie.</summary>
         /// <param name="id">ID of the movie.</param>
@@ -48,6 +48,6 @@
         ///   - Movie is not valid
         ///   - Movie title already exists
         /// </remarks>
-        bool Update ( int id, Movie movie, out string errorMessage );
+        void Update ( int id, Movie movie );
     }
 }
