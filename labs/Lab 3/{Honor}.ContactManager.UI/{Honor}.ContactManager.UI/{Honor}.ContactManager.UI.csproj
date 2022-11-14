@@ -7,6 +7,15 @@
     <Nullable>disable</Nullable>
     <UseWindowsForms>true</UseWindowsForms>
     <ImplicitUsings>enable</ImplicitUsings>
+    <Description>This application manages a list of contacts.</Description>
+    <Product>Honors Contact Manager</Product>
+    <Title>Honor's Contact Manager</Title>
+    <Company />
+    <Authors>Honor McClung</Authors>
   </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Honor.ContactManager\Honor.ContactManager.csproj" />
+  </ItemGroup>
 
 </Project>

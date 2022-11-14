@@ -6,5 +6,17 @@ namespace _Honor_.ContactManager.UI
         {
             InitializeComponent();
         }
+
+        private void exitToolStripMenuItem_Click ( object sender, EventArgs e )
+        {
+            Close();
+        }
+
+        private void onHelpAbout_Click ( object sender, EventArgs e )
+        {
+            var about = new AboutContactManager();
+
+            about.ShowDialog();
+        }
     }
 }
