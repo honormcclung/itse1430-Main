@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace Honor.ContactManager
 {
     /// <summary>Provides a database of contacts.</summary>
-    internal interface IContactDatabase
+    public interface IContactDatabase
     {
         /// <summary>Adds a contact to the database.</summary>
         /// <param name="contact">The comtact to add.</param>
@@ -29,7 +29,7 @@ namespace Honor.ContactManager
         ///    - Last name is null
         ///    - Last name is not valid
         /// </remarks>
-        Contact Get ( string lastName );
+        Contact Get ( int id );
 
         /// <summary>Gets all the contacts.</summary>
         /// <returns>The contacts.</returns>        

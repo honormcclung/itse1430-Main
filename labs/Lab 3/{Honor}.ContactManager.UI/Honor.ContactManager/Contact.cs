@@ -5,6 +5,11 @@ namespace Honor.ContactManager
 {
     public class Contact : IValidatableObject
     {
+        /// <summary>Initializes an instance of the <see cref="Movie"/> class.</summary>
+        public Contact () : this("", "", false)
+        {
+        }
+
         /// <summary>Initializes an instance of the <see cref="Contact"/> class.</summary>
         /// <param name="lastName'">The last name.</param>
         /// <param name="email">The email.</param>
