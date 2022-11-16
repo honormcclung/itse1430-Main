@@ -38,6 +38,7 @@
 
         /// <summary>Updates a movie in the database.</summary>
         /// <param name="movie">The new movie information.</param>
+        /// <param name="id">ID of the movie to remove.</param>
         /// <param name="errorMessage">The error message, if any.</param>
         /// <returns>true if successful or false otherwise.</returns>
         /// <remarks>
