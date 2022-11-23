@@ -1,109 +1,220 @@
 ﻿using Honor.ContactManager;
 
-namespace Honor.ContactManager;
+using MongoDB.Bson;
 
-/// <summary>Provides a base implementation of <see cref="IMovieDatabase"/>.</summary>
-public abstract class ContactDatabase : IContactDatabase
+namespace Honor.ContactManager
 {
-    /// <inheritdoc />
-    public Contact Add ( Contact contact )
+    /// <summary>Provides a base implementation of <see cref="IContactDatabase"/>.</summary>
+    public class ContactDatabase : IContactDatabase
     {
-        //Validate movie
-        if (contact == null)
-            throw new ArgumentNullException(nameof(contact));
-
-        //Use IValidatableObject Luke...
-        ObjectValidator.Validate(contact);
-
-        //Must be unique
-        var existing = FindByTitle(contact.LastName);
-        if (existing != null)
-            throw new InvalidOperationException("Movie title must be unique.");
-
-        //Add
-        contact = AddCore(contact);
-        return contact;
-    }
-
-    /// <inheritdoc />        
-    public Contact Get ( int id )
-    {
-        if (id <= 0)
-            throw new ArgumentOutOfRangeException(nameof(id), "Id must be > 0.");
-
-        return GetCore(id);
-    }
-
-    /// <inheritdoc />                
-    public IEnumerable<Contact> GetAll ()
-    {
-        return GetAllCore();
-    }
-
-    /// <inheritdoc />        
-    public void Remove ( int id )
-    {
-        if (id <= 0)
-            throw new ArgumentOutOfRangeException(nameof(id), "Id must be > 0.");
-
-        RemoveCore(id);
-    }
-
-    /// <inheritdoc />        
-    public void Update ( int id, Contact contact )
-    {
-        //Validate movie
-        if (id <= 0)
-            throw new ArgumentOutOfRangeException(nameof(id), "Id must be > 0.");
-
-        if (contact == null)
-            throw new ArgumentNullException(nameof(contact));
-        ObjectValidator.Validate(contact);
-
-        //Movie must already exist
-        var oldMovie = GetCore(id);
-        if (oldMovie == null)
-            throw new ArgumentException("Movie does not exist", nameof(contact));
-
-        //Must be unique
-        var existing = FindByTitle(contact.LastName);
-        if (existing != null && existing.Id != id)
-            throw new InvalidOperationException("Movie title must be unique.");
-
-        try
+        /*
+       public List<Contact> ContactDatabase: IContactDatabase ()
         {
+            public static List<Contact> _contacts = new List<Contact> ();
+        }
+        */
+
+        //public ContactDatabase ()
+        //{
+        //    List<Contact> _contacts = new List<Contact>();
+        //}
+
+        //public static List<Contact> _contacts;
+        //= new List<Contact>();
+
+        //public List<Contact> contacts { set { _contacts = value; } get { return _contacts; } }
+
+        /// <inheritdoc />
+        public Contact Add ( Contact contact, out string errorMessage )
+        {
+            //Validate contact
+            //if (contact == null)
+            //    throw new ArgumentNullException(nameof(contact));
+
+            //Use IValidatableObject Luke...
+            //ObjectValidator.Validate(contact);
+
+            //Validate movie
+            if (contact == null)
+            {
+                errorMessage = "Contact cannot be null";
+                return null;
+            };
+
+            //Use IValidatableObject Luke...
+            if (!ObjectValidator.IsValid(contact, out errorMessage))
+                return null;
+
+            //Must be unique
+            //var existing = Get(contact.Id);
+            //if (existing != null)
+            //   throw new InvalidOperationException("Contact name must be unique.");
+
+            //Must be unique
+            var existing = FindByLastName(contact.LastName);
+            if (existing != null)
+            {
+                errorMessage = "Movie must be unique";
+                return null;
+            };
+
+            //Add
+            contact = AddCore(contact);
+            //_contacts.Add(contact);
+            return contact;
+        }
+
+        /// <inheritdoc />        
+        public Contact Get ( int id )
+        {
+            //Contact newContact = new Contact();
+            //bool contactExists = false;
+
+            if (id <= 0)
+            {
+                throw new ArgumentOutOfRangeException(nameof(id), "ID name must be > 0.");
+            }
+            /*
+            foreach (var contact in _contacts)
+            {
+                if (contact.Id == id)
+                {
+                    //newContact = contact;
+                    //contactExists = true;
+                    return contact;
+                    break;
+                }
+            }
+            */
+
+            return GetCore(id);
+            //return null;
+            //return newContact;
+        }
+
+        /// <inheritdoc />                
+        public IEnumerable<Contact> GetAll ()
+        {
+            //return _contacts;
+            return GetAllCore();
+        }
+
+        /// <inheritdoc />        
+        public void Remove ( int id )
+        {
+
+            if (id <= 0)
+                throw new ArgumentOutOfRangeException(nameof(id), "Id must be > 0.");
+
+            RemoveCore(id);
+            /*
+            foreach (var contact in _contacts)
+            {
+                if (contact.Id == id)
+                {
+                    //contactExists = true;
+                    _contacts.Remove(contact);
+
+                }
+            }
+            */
+
+
+
+        }
+
+        /// <inheritdoc />        
+        public string Update ( int id, Contact contact, out string errorMessage )
+        {
+            //Validate contact
+            if (contact == null)
+            {
+                errorMessage = "Contact cannot be null";
+                //return false;
+                return errorMessage;
+            };
+
+            if (!ObjectValidator.IsValid(contact, out errorMessage))
+                //return false;
+                return errorMessage;
+
+            //Contact must already exist
+            var oldContact = GetCore(id);
+            if (oldContact == null)
+            {
+                errorMessage = "Contact does not exist";
+                //return false;
+                return errorMessage;
+            };
+
+            //Must be unique
+            //var existing = Get(newContact.Id);
+            var existing = FindByLastName(contact.LastName);
+            if (existing != null && existing.Id != id)
+            {
+                errorMessage = "Contact must be unique";
+                //return false;
+                return errorMessage;
+            };
+            /*
+            try
+            {
+                foreach (var contact in _contacts)
+                {
+                    if (contact.Id == id)
+                    {
+                        //contactExists = true;
+                        _contacts.Remove(contact);
+
+                    }
+                }
+                _contacts.Add(newContact);
+                //UpdateCore(id, contact);
+            } catch (Exception)
+            {
+                errorMessage = "Update failed";
+            };
+            */
+
             UpdateCore(id, contact);
-        } catch (Exception e)
-        {
-            throw new Exception("Update failed", e);
-        };
+
+            //errorMessage = null;
+
+            return errorMessage;
+        }
+
+
+        /// <summary>Adds a contact to the database.</summary>
+        /// <param name="contact">The contact to add.</param>
+        /// <returns>The new contact.</returns>
+        protected Contact AddCore ( Contact contact );
+
+
+        /// <summary>Gets a contact by ID.</summary>
+        /// <param name="id">The ID of the contact.</param>
+        /// <returns>The contact, if any.</returns>
+        protected Contact GetCore ( int id );
+
+        /// <summary>Gets all contacts.</summary>
+        /// <returns>The list of contacts.</returns>
+        protected IEnumerable<Contact> GetAllCore ();
+
+        /// <summary>Removes a contact given its ID.</summary>
+        /// <param name="id">The contact ID.</param>
+        protected void RemoveCore ( int id );
+
+        /// <summary>Updates an existing contact.</summary>
+        /// <param name="id">The contact ID.</param>
+        /// <param name="contact">The contact details.</param>
+        protected void UpdateCore ( int id, Contact contact );
+
+        /// <summary>Finds a contact by its title.</summary>
+        /// <param name="lastName">The contact last name.</param>
+        /// <returns>The contact, if any.</returns>
+        protected Contact FindByLastName ( string lastName );
+
+
     }
-
-    /// <summary>Adds a movie to the database.</summary>
-    /// <param name="movie">The movie to add.</param>
-    /// <returns>The new movie.</returns>
-    protected abstract Contact AddCore ( Contact contact );
-
-    /// <summary>Gets a movie by ID.</summary>
-    /// <param name="id">The ID of the movie.</param>
-    /// <returns>The movie, if any.</returns>
-    protected abstract Contact GetCore ( int id );
-
-    /// <summary>Gets all movies.</summary>
-    /// <returns>The list of movies.</returns>
-    protected abstract IEnumerable<Contact> GetAllCore ();
-
-    /// <summary>Removes a movie given its ID.</summary>
-    /// <param name="id">The movie ID.</param>
-    protected abstract void RemoveCore ( int id );
-
-    /// <summary>Updates an existing movie.</summary>
-    /// <param name="id">The movie ID.</param>
-    /// <param name="movie">The movie details.</param>
-    protected abstract void UpdateCore ( int id, Contact contact );
-
-    /// <summary>Finds a movie by its title.</summary>
-    /// <param name="title">The movie title.</param>
-    /// <returns>The movie, if any.</returns>
-    protected abstract Contact FindByTitle ( string title );
 }
+
+

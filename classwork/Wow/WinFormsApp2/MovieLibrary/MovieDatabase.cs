@@ -1,4 +1,6 @@
-﻿namespace MovieLibrary
+﻿using MovieLibrary;
+
+namespace MovieLibrary
 {
     /// <summary>Provides a base implementation of <see cref="IMovieDatabase"/>.</summary>
     public abstract class MovieDatabase : IMovieDatabase

@@ -33,6 +33,8 @@
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.onHelpAbout = new System.Windows.Forms.ToolStripMenuItem();
+            this.contactsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.onContactsAdd = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -41,7 +43,8 @@
             this.menuStrip1.ImageScalingSize = new System.Drawing.Size(24, 24);
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.fileToolStripMenuItem,
-            this.helpToolStripMenuItem});
+            this.helpToolStripMenuItem,
+            this.contactsToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(800, 33);
@@ -74,9 +77,25 @@
             // onHelpAbout
             // 
             this.onHelpAbout.Name = "onHelpAbout";
-            this.onHelpAbout.Size = new System.Drawing.Size(270, 34);
+            this.onHelpAbout.Size = new System.Drawing.Size(164, 34);
             this.onHelpAbout.Text = "About";
             this.onHelpAbout.Click += new System.EventHandler(this.onHelpAbout_Click);
+            // 
+            // contactsToolStripMenuItem
+            // 
+            this.contactsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.onContactsAdd});
+            this.contactsToolStripMenuItem.Name = "contactsToolStripMenuItem";
+            this.contactsToolStripMenuItem.Size = new System.Drawing.Size(97, 29);
+            this.contactsToolStripMenuItem.Text = "Contacts";
+            this.contactsToolStripMenuItem.Click += new System.EventHandler(this.contactsToolStripMenuItem_Click);
+            // 
+            // onContactsAdd
+            // 
+            this.onContactsAdd.Name = "onContactsAdd";
+            this.onContactsAdd.Size = new System.Drawing.Size(270, 34);
+            this.onContactsAdd.Text = "Add";
+            this.onContactsAdd.Click += new System.EventHandler(this.onContactsAdd_Click);
             // 
             // Form1
             // 
@@ -101,5 +120,7 @@
         private ToolStripMenuItem exitToolStripMenuItem;
         private ToolStripMenuItem helpToolStripMenuItem;
         private ToolStripMenuItem onHelpAbout;
+        private ToolStripMenuItem contactsToolStripMenuItem;
+        private ToolStripMenuItem onContactsAdd;
     }
 }

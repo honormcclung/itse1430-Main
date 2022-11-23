@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
+using System.Net.Mail;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -29,5 +30,7 @@ namespace Honor.ContactManager
         {
             Validator.ValidateObject(instance, new ValidationContext(instance), true);
         }
+
+
     }
 }

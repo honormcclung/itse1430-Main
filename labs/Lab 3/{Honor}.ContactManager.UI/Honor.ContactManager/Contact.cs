@@ -1,14 +1,30 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿/*
+ * Honor McClung
+ * Lab 3
+ * ISTE 1430 - Fall 2022 
+ */
+
+using System;
+using System.ComponentModel.DataAnnotations;
 using System.Net.Mail;
+using System.Reflection.Emit;
+using System.Runtime.Serialization;
+
+using MongoDB.Bson;
+using MongoDB.Bson.Serialization.Attributes;
+using MongoDB.Bson.Serialization.IdGenerators;
 
 namespace Honor.ContactManager
 {
     public class Contact : IValidatableObject
     {
-        /// <summary>Initializes an instance of the <see cref="Movie"/> class.</summary>
+        #region Construction
+
+        /// <summary>Initializes an instance of the <see cref="Contact"/> class.</summary>
         public Contact () : this("", "", false)
         {
         }
+
 
         /// <summary>Initializes an instance of the <see cref="Contact"/> class.</summary>
         /// <param name="lastName'">The last name.</param>
@@ -19,6 +35,7 @@ namespace Honor.ContactManager
             LastName = lastName;
             Email = email;
             IsFavorite = isFavorite;
+            //Id = id;
         }
 
         /// <summary>Initializes an instance of the <see cref="Contact"/> class.</summary>
@@ -32,6 +49,7 @@ namespace Honor.ContactManager
             LastName = lastName;
             Email = email;
             IsFavorite = isFavorite;
+            //Id = id;
         }
 
         /// <summary>Initializes an instance of the <see cref="Contact"/> class.</summary>
@@ -40,17 +58,24 @@ namespace Honor.ContactManager
         /// <param name="email">The email.</param>
         /// <param name="notes">The notes.</param>
         /// <param name="isFavorite">If the customer is a favorite.</param>
-        public Contact ( string firstName, string lastName, string email, string notes, bool isFavorite) : base() 
+        public Contact ( string firstName, string lastName, string email, string notes, bool isFavorite ) : base() 
         {
             FirstName = firstName;
             LastName = lastName;
             Email = email;
             Notes = notes;
             IsFavorite = isFavorite;
+            //Id = id;
         }
+
+        #endregion
 
         /// <summary>Gets the unique ID.</summary>
         public int Id { get; set; }
+        /*
+        [BsonId(IdGenerator = typeof(ObjectIdGenerator))]
+        public ObjectId Id { get; set; }
+        */
 
         /// <summary>Gets or sets the first name.</summary>
         public string FirstName
@@ -59,7 +84,7 @@ namespace Honor.ContactManager
             get => _firstName ?? "";                 //{ return _title ?? ""; }   
             set => _firstName = value?.Trim() ?? ""; //{ _title = value?.Trim() ?? ""; }
         }
-        private String _firstName;
+        private string _firstName;
 
         /// <summary>Gets or sets the last name.</summary>
         public string LastName
@@ -68,7 +93,7 @@ namespace Honor.ContactManager
             get => _lastName ?? "";                 //{ return _title ?? ""; }   
             set => _lastName = value?.Trim() ?? ""; //{ _title = value?.Trim() ?? ""; }
         }
-        private String _lastName;
+        private string _lastName;
 
         /// <summary>Gets or sets the email.</summary>
         public string Email
@@ -77,7 +102,7 @@ namespace Honor.ContactManager
             get => _email ?? "";                 //{ return _title ?? ""; }   
             set => _email = value?.Trim() ?? ""; //{ _title = value?.Trim() ?? ""; }
         }
-        private String _email;
+        private string _email;
 
         /// <summary>Gets or sets the contact notes.</summary>
         public string Notes
@@ -86,14 +111,14 @@ namespace Honor.ContactManager
             get => _notes ?? "";                 //{ return _title ?? ""; }   
             set => _notes = value?.Trim() ?? ""; //{ _title = value?.Trim() ?? ""; }
         }
-        private String _notes;
+        private string _notes;
 
 
         /// <summary>Determines if the contact is a favorite.</summary>
         public bool IsFavorite { get; set; }
 
         public override string ToString () => LastName; //{ return Title; }
-
+        
         public IEnumerable<ValidationResult> Validate ( ValidationContext validationContext )
         {
             var errors = new List<ValidationResult>();
@@ -117,6 +142,7 @@ namespace Honor.ContactManager
 
             return errors;
         }
+        
 
 
     }

@@ -1,5 +1,7 @@
 ﻿using System.ComponentModel;
 
+using MovieLibrary;
+
 namespace WinFormsApp2
 {
     public partial class MovieForm : Form

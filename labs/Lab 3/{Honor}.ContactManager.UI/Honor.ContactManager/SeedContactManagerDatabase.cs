@@ -45,15 +45,15 @@
             //            Description = "Based on book",
             //        };
             #endregion
-            var movies = new Contact[] {
-                new Contact() {
+            List<Contact> contactList = new List<Contact> {
+                new Contact {
                     FirstName = "Honor",
                     LastName = "McClung",
                     Email = "honor.mae.mcclung@gmail.com",
                     Notes = "test",
                     IsFavorite = true
                 },
-                new Contact() {
+                new Contact {
                     FirstName = "Neomi",
                     LastName = "Castro",
                     Email = "neomi.castro@gmail.com",
@@ -61,8 +61,8 @@
                     IsFavorite = false
                 }
             };
-            foreach (var movie in movies)
-                database.Add(movie);
+            foreach (var contact in contactList)
+                database.Add(contact, out var error);
         }
     }
 }

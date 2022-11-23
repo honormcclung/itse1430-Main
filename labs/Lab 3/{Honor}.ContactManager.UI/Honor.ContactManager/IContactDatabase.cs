@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+using MongoDB.Bson;
+
 namespace Honor.ContactManager
 {
     /// <summary>Provides a database of contacts.</summary>
@@ -19,8 +21,8 @@ namespace Honor.ContactManager
         ///   - Contact is not valid
         ///   - Contact title already exists
         /// </remarks>
-        Contact Add ( Contact contact);
-
+        Contact Add ( Contact contact, out string errorMessage);
+        /*
         /// <summary>Gets a contact.</summary>
         /// <param name="lastName">Last name of the contact.</param>
         /// <returns>The contact, if any.</returns>
@@ -29,6 +31,17 @@ namespace Honor.ContactManager
         ///    - Last name is null
         ///    - Last name is not valid
         /// </remarks>
+        Contact Get ( Contact contact );
+        */
+
+        /// <summary>Gets a contact.</summary>
+        /// <param name="id">ID of the contact.</param>
+        /// <returns>The contact, if any.</returns>
+        /// <remarks>
+        /// Fails if:
+        ///    - Id is less than 1
+        /// </remarks>
+        //Contact Get ( ObjectId id );
         Contact Get ( int id );
 
         /// <summary>Gets all the contacts.</summary>
@@ -41,13 +54,14 @@ namespace Honor.ContactManager
         /// Fails if:
         /// - Id <= 0
         /// </remarks>
+        //void Remove ( ObjectId id );
         void Remove ( int id );
 
         /// <summary>Updates a contact in the database.</summary>
         /// <param name="contact">The new contact information.</param>
         /// <param name="id">ID of the contact to remove.</param>
         /// <param name="errorMessage">The error message, if any.</param>
-        /// <returns>true if successful or false otherwise.</returns>
+        /// <returns>Error if anything is incorrect.</returns>
         /// <remarks>
         /// Fails if:
         ///   - Id is <= 0
@@ -56,6 +70,7 @@ namespace Honor.ContactManager
         ///   - Contact is not valid
         ///   - Contact title already exists
         /// </remarks>
-        void Update ( int id, Contact contact );
+        //string Update ( ObjectId id, Contact contact, out string errorMessage );
+        string Update ( int id, Contact contact, out string errorMessage );
     }
 }
