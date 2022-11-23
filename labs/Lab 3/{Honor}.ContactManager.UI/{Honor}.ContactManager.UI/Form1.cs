@@ -7,7 +7,9 @@ namespace _Honor_.ContactManager.UI
     public partial class Form1 : Form
     {
         #region Construction
-        ContactDatabase _contacts = new ContactDatabase();
+        //public ContactDatabase _contacts = new ContactDatabase();
+
+        public ContactDatabase _contacts = new Honor.ContactManager.MemoryContactDatabase();
 
         //List<Contact> contacts = _contacts.GetAll();
         //_contacts
@@ -95,7 +97,7 @@ namespace _Honor_.ContactManager.UI
                 };
             };
 
-            //_lstMovies.Items.Clear();
+            _lstContacts.Items.Clear();
 
             //Order movies by title, then by release year
             //Chain calls together
@@ -111,13 +113,13 @@ namespace _Honor_.ContactManager.UI
             //movies = movies.ThenBy();
 
             //Use Enumerable 
-            //_lstMovies.Items.AddRange(Enumerable.ToArray(movies));
+            //_lstContacts.Items.AddRange(Enumerable.ToArray(contacts));
 
-            //_lstMovies.Items.AddRange(items);
+            //_lstContacts.Items.AddRange(items);
             //_contacts.AddRange(items);
 
-            //foreach (var movie in movies)
-            //    _lstMovies.Items.Add(movie);
+            foreach (var contact in contacts)
+                _lstContacts.Items.Add(new ListViewItem(new string[] {contact.LastName, contact.FirstName, contact.Email}));
         }
 
         private bool Confirm ( string message, string title )

@@ -118,7 +118,29 @@ namespace Honor.ContactManager
         public bool IsFavorite { get; set; }
 
         public override string ToString () => LastName; //{ return Title; }
-        
+
+        /// <summary>Clones the existing contact.</summary>
+        /// <returns>A copy of the contact.</returns>
+        public Contact Clone ()
+        {
+            var contact = new Contact();
+            CopyTo(contact);
+
+            return contact;
+        }
+
+        /// <summary>Copy the contact to another instance.</summary>
+        /// <param name="contact">Contact to copy into.</param>
+        public void CopyTo ( Contact contact )
+        {
+            contact.Id = Id;
+            contact.LastName = LastName;
+            contact.Notes = Notes;
+            contact.FirstName = FirstName;
+            contact.Email = Email;
+            contact.IsFavorite = IsFavorite;
+        }
+
         public IEnumerable<ValidationResult> Validate ( ValidationContext validationContext )
         {
             var errors = new List<ValidationResult>();

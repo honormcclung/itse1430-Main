@@ -35,6 +35,10 @@
             this.onHelpAbout = new System.Windows.Forms.ToolStripMenuItem();
             this.contactsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.onContactsAdd = new System.Windows.Forms.ToolStripMenuItem();
+            this._lstContacts = new System.Windows.Forms.ListView();
+            this.ListViewLastName = new System.Windows.Forms.ColumnHeader();
+            this.ListViewFirstName = new System.Windows.Forms.ColumnHeader();
+            this.ListViewEmail = new System.Windows.Forms.ColumnHeader();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -93,15 +97,44 @@
             // onContactsAdd
             // 
             this.onContactsAdd.Name = "onContactsAdd";
-            this.onContactsAdd.Size = new System.Drawing.Size(270, 34);
+            this.onContactsAdd.Size = new System.Drawing.Size(148, 34);
             this.onContactsAdd.Text = "Add";
             this.onContactsAdd.Click += new System.EventHandler(this.onContactsAdd_Click);
+            // 
+            // _lstContacts
+            // 
+            this._lstContacts.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.ListViewLastName,
+            this.ListViewFirstName,
+            this.ListViewEmail});
+            this._lstContacts.Location = new System.Drawing.Point(32, 69);
+            this._lstContacts.Name = "_lstContacts";
+            this._lstContacts.Size = new System.Drawing.Size(717, 348);
+            this._lstContacts.TabIndex = 1;
+            this._lstContacts.UseCompatibleStateImageBehavior = false;
+            this._lstContacts.View = System.Windows.Forms.View.Details;
+            // 
+            // ListViewLastName
+            // 
+            this.ListViewLastName.Text = "Last Name";
+            this.ListViewLastName.Width = 220;
+            // 
+            // ListViewFirstName
+            // 
+            this.ListViewFirstName.Text = "FirstName";
+            this.ListViewFirstName.Width = 200;
+            // 
+            // ListViewEmail
+            // 
+            this.ListViewEmail.Text = "ListViewEmail";
+            this.ListViewEmail.Width = 300;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this._lstContacts);
             this.Controls.Add(this.menuStrip1);
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "Form1";
@@ -122,5 +155,9 @@
         private ToolStripMenuItem onHelpAbout;
         private ToolStripMenuItem contactsToolStripMenuItem;
         private ToolStripMenuItem onContactsAdd;
+        private ListView _lstContacts;
+        private ColumnHeader ListViewLastName;
+        private ColumnHeader ListViewFirstName;
+        private ColumnHeader ListViewEmail;
     }
 }

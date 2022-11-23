@@ -14,20 +14,23 @@ using Honor.ContactManager;
 
 using Microsoft.VisualBasic.Devices;
 
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.ListView;
+
+using Button = System.Windows.Forms.Button;
+using ListView = System.Windows.Forms.ListView;
+using TextBox = System.Windows.Forms.TextBox;
 
 namespace _Honor_.ContactManager.UI
 {
     public partial class ContactForm : Form
     {
-        //ContactDatabase _contacts = new ContactDatabase();
-
-        //List<Contact> EnteredContacts = new List<Contact>();
-        public ContactForm ( /*IEnumerable<Contact> contacts*/)
+        List<string> errorList = new List<string>();
+        public ContactForm ( /*IEnumerable<Contact> contacts*/ )
         {
             InitializeComponent();
-            //List<Contact> _contacts = new List<_contacts>();
-            //List<Contact> contactList = (List<Contact>)contacts;
+            AutoValidate = AutoValidate.EnableAllowFocusChange;
+            //IEnumerable<Contact> contactsList = contacts;
         }
 
         /// <summary>Gets or sets the movie being edited.</summary>
@@ -46,7 +49,7 @@ namespace _Honor_.ContactManager.UI
         {
 
         }
-
+        /*
         private void _txtLastName_Validating ( object sender, CancelEventArgs e )
         {
             var control = sender as TextBox;
@@ -75,12 +78,13 @@ namespace _Honor_.ContactManager.UI
                 //e.Cancel = true;
             };
         }
+        */
 
         private void _txtFirstName_Validating ( object sender, CancelEventArgs e )
         {
             
         }
-
+        /*
         private void _txtEmail_Validating ( object sender, CancelEventArgs e )
         {
             var control = sender as TextBox;
@@ -104,6 +108,7 @@ namespace _Honor_.ContactManager.UI
                 //e.Cancel = true;
             }
         }
+        */
 
         private void label4_Validating ( object sender, EventArgs e )
         {
@@ -136,6 +141,12 @@ namespace _Honor_.ContactManager.UI
             if (!ObjectValidator.IsValid(contact, out var error))
             {
                 DisplayError(error, "Save");
+                /*
+                foreach (var errorMsg in errorList)
+                {
+                    DisplayError(errorMsg, "Save");
+                }
+                */
                 return;
             };
 
@@ -143,6 +154,10 @@ namespace _Honor_.ContactManager.UI
             // setting Form's DialogResult to a reasonable value
             // Call Close()
             SelectedContact = contact;
+            //ListView listView = new ListView();
+            //ListView.View = View.Details;
+            //var item = new ListViewItem(new string[] { contact.LastName, contact.FirstName, contact.Email });
+            //ListViewContacts.Items.Add(item);
             DialogResult = DialogResult.OK;
             Close();
 
@@ -155,8 +170,9 @@ namespace _Honor_.ContactManager.UI
 
         private void onCancel ( object sender, EventArgs e )
         {
-            DialogResult = DialogResult.OK;
-            Close();
+            //DialogResult = DialogResult.OK;
+            //Close();
+            DialogResult = DialogResult.Cancel;
         }
 
         private void onValidateEmail ( object sender, CancelEventArgs e )
@@ -173,6 +189,7 @@ namespace _Honor_.ContactManager.UI
                 //e.Cancel = true;
                 //control.Focus();
                 _errors.SetError(control, "Email is not valid");
+                errorList.Add("Email is not valid");
                 e.Cancel = true;
             } else
             {
@@ -198,15 +215,20 @@ namespace _Honor_.ContactManager.UI
                 //e.Cancel = true;
                 //control.Focus();
                 _errors.SetError(control, "Last name is required");
+                errorList.Add("Last name is required");
                 e.Cancel = true;
                 //e.Cancel = true;
-            } else
+            } /*else if ( == null)
             {
                 //Valid
                 //e.Cancel = true;
-                _errors.SetError(control, "");
+                _errors.SetError(control, "Last name must be unique");
+                errorList.Add("Last name muyst be unique");
                 //e.Cancel = true;
-            };
+            } */else
+            {
+                _errors.SetError(control, "");
+            }
         }
 
         private void onValidatingIsFavorite ( object sender, CancelEventArgs e )

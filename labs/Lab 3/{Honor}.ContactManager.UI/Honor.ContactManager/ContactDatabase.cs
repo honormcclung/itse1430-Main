@@ -5,7 +5,7 @@ using MongoDB.Bson;
 namespace Honor.ContactManager
 {
     /// <summary>Provides a base implementation of <see cref="IContactDatabase"/>.</summary>
-    public class ContactDatabase : IContactDatabase
+    public abstract class ContactDatabase : IContactDatabase
     {
         /*
        public List<Contact> ContactDatabase: IContactDatabase ()
@@ -187,31 +187,31 @@ namespace Honor.ContactManager
         /// <summary>Adds a contact to the database.</summary>
         /// <param name="contact">The contact to add.</param>
         /// <returns>The new contact.</returns>
-        protected Contact AddCore ( Contact contact );
+        protected abstract Contact AddCore ( Contact contact );
 
 
         /// <summary>Gets a contact by ID.</summary>
         /// <param name="id">The ID of the contact.</param>
         /// <returns>The contact, if any.</returns>
-        protected Contact GetCore ( int id );
+        protected abstract Contact GetCore ( int id );
 
         /// <summary>Gets all contacts.</summary>
         /// <returns>The list of contacts.</returns>
-        protected IEnumerable<Contact> GetAllCore ();
+        protected abstract IEnumerable<Contact> GetAllCore ();
 
         /// <summary>Removes a contact given its ID.</summary>
         /// <param name="id">The contact ID.</param>
-        protected void RemoveCore ( int id );
+        protected abstract void RemoveCore ( int id );
 
         /// <summary>Updates an existing contact.</summary>
         /// <param name="id">The contact ID.</param>
         /// <param name="contact">The contact details.</param>
-        protected void UpdateCore ( int id, Contact contact );
+        protected abstract void UpdateCore ( int id, Contact contact );
 
         /// <summary>Finds a contact by its title.</summary>
         /// <param name="lastName">The contact last name.</param>
         /// <returns>The contact, if any.</returns>
-        protected Contact FindByLastName ( string lastName );
+        protected abstract Contact FindByLastName ( string lastName );
 
 
     }
