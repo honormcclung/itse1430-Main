@@ -9,14 +9,6 @@ namespace _Honor_.ContactManager.UI
     public partial class MainForm : Form
     {
         #region Construction
-
-        ////////
-        ///////////
-        //public ContactDatabase _contacts = new Honor.ContactManager.MemoryContactDatabase();
-        ///////////////
-        /////////////
-        ///
-
         public MainForm ( )
         {
             InitializeComponent();
@@ -115,7 +107,7 @@ namespace _Honor_.ContactManager.UI
 
             var items = contacts.OrderBy(x => x.LastName).ThenBy(x => x.FirstName);
 
-            _lstContacts.Items.AddRange(contacts.ToArray());
+            _lstContacts.Items.AddRange(items.ToArray());
         }
 
         private bool Confirm ( string message, string title )

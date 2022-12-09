@@ -23,6 +23,18 @@
                     Email = "neomi.castro@gmail.com",
                     Notes = "test2",
                     IsFavorite = false
+                },
+                new Contact {
+                    FirstName = "Kendrick",
+                    LastName = "King",
+                    Email = "kk@gmail.com",
+                    Notes = "test3",
+                    IsFavorite = false
+                },
+                new Contact {
+                    FirstName = "michael",
+                    LastName = "myers",
+                    Email = "mm@portfoliopatterns.com",
                 }
             };
             foreach (var contact in contactList)

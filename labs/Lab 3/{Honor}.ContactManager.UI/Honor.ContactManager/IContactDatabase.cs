@@ -22,17 +22,6 @@ namespace Honor.ContactManager
         ///   - Contact title already exists
         /// </remarks>
         Contact Add ( Contact contact, out string errorMessage);
-        /*
-        /// <summary>Gets a contact.</summary>
-        /// <param name="lastName">Last name of the contact.</param>
-        /// <returns>The contact, if any.</returns>
-        /// <remarks>
-        /// Fails if:
-        ///    - Last name is null
-        ///    - Last name is not valid
-        /// </remarks>
-        Contact Get ( Contact contact );
-        */
 
         /// <summary>Gets a contact.</summary>
         /// <param name="id">ID of the contact.</param>
@@ -53,14 +42,13 @@ namespace Honor.ContactManager
         /// Fails if:
         /// - Id <= 0
         /// </remarks>
-        //void Remove ( ObjectId id );
         void Remove ( int id );
 
         /// <summary>Updates a contact in the database.</summary>
         /// <param name="contact">The new contact information.</param>
         /// <param name="id">ID of the contact to remove.</param>
         /// <param name="errorMessage">The error message, if any.</param>
-        /// <returns>Error if anything is incorrect.</returns>
+        /// <returns>Bolean value on whether there is an error.</returns>
         /// <remarks>
         /// Fails if:
         ///   - Id is <= 0
@@ -69,7 +57,6 @@ namespace Honor.ContactManager
         ///   - Contact is not valid
         ///   - Contact title already exists
         /// </remarks>
-        //string Update ( ObjectId id, Contact contact, out string errorMessage );
         bool Update ( int id, Contact contact, out string errorMessage );
     }
 }

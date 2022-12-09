@@ -14,7 +14,6 @@ namespace Honor.ContactManager
         /// <returns>The new contact.</returns>
         protected override Contact AddCore ( Contact contact )
         {
-            //Add
             contact.Id = _id++;
             _contacts.Add(contact.Clone());
 

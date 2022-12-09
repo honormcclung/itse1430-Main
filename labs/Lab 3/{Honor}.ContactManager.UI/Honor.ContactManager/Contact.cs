@@ -25,7 +25,6 @@ namespace Honor.ContactManager
         {
         }
 
-
         /// <summary>Initializes an instance of the <see cref="Contact"/> class.</summary>
         /// <param name="lastName'">The last name.</param>
         /// <param name="email">The email.</param>
@@ -35,7 +34,6 @@ namespace Honor.ContactManager
             LastName = lastName;
             Email = email;
             IsFavorite = isFavorite;
-            //Id = id;
         }
 
         /// <summary>Initializes an instance of the <see cref="Contact"/> class.</summary>
@@ -49,7 +47,6 @@ namespace Honor.ContactManager
             LastName = lastName;
             Email = email;
             IsFavorite = isFavorite;
-            //Id = id;
         }
 
         /// <summary>Initializes an instance of the <see cref="Contact"/> class.</summary>
@@ -65,22 +62,16 @@ namespace Honor.ContactManager
             Email = email;
             Notes = notes;
             IsFavorite = isFavorite;
-            //Id = id;
         }
 
         #endregion
 
         /// <summary>Gets the unique ID.</summary>
         public int Id { get; set; }
-        /*
-        [BsonId(IdGenerator = typeof(ObjectIdGenerator))]
-        public ObjectId Id { get; set; }
-        */
 
         /// <summary>Gets or sets the first name.</summary>
         public string FirstName
         {
-            //Expression body            
             get => _firstName ?? "";                    
             set => _firstName = value?.Trim() ?? ""; 
         }
@@ -89,7 +80,6 @@ namespace Honor.ContactManager
         /// <summary>Gets or sets the last name.</summary>
         public string LastName
         {
-            //Expression body            
             get => _lastName ?? "";                    
             set => _lastName = value?.Trim() ?? ""; 
         }
@@ -100,12 +90,10 @@ namespace Honor.ContactManager
         {
             get { return String.Join(" ", FirstName, LastName); }
         }
-        //private String _fullName;
 
         /// <summary>Gets or sets the email.</summary>
         public string Email
         {
-            //Expression body            
             get => _email ?? "";                   
             set => _email = value?.Trim() ?? ""; 
         }
@@ -114,7 +102,6 @@ namespace Honor.ContactManager
         /// <summary>Gets or sets the contact notes.</summary>
         public string Notes
         {
-            //Expression body            
             get => _notes ?? "";                    
             set => _notes = value?.Trim() ?? ""; 
         }
@@ -126,7 +113,7 @@ namespace Honor.ContactManager
 
         public override string ToString ()
         {
-            return $"{LastName}, {FirstName} ({Email})";
+                return $"{LastName},{FirstName} ({Email})";
         }
 
         /// <summary>Clones the existing contact.</summary>
@@ -158,29 +145,6 @@ namespace Honor.ContactManager
 
         public IEnumerable<ValidationResult> Validate ( ValidationContext validationContext )
         {
-            /*
-            var errors = new List<ValidationResult>();
-
-            bool IsValidEmail ( string source )
-            {
-                return MailAddress.TryCreate(source, out var address);
-            }
-
-            if (LastName.Length == 0)
-                errors.Add(new ValidationResult("Title is required", new[] { nameof(LastName) }));
-
-            if (Email.Length == 0)
-                errors.Add(new ValidationResult("Email is required", new[] { nameof(Email) }));
-
-            if (IsValidEmail(Email) == false)
-                errors.Add(new ValidationResult("Email is not valid", new[] { nameof(Email) }));
-            
-            if (IsFavorite != true && IsFavorite != false)
-                errors.Add(new ValidationResult("If contact is favorite is required", new[] { nameof(IsFavorite) }));
-
-            return errors;
-            */
-
             if(String.IsNullOrEmpty(LastName))
             yield return new ValidationResult("LastName is required.", new[] { nameof(LastName) });
 
@@ -189,8 +153,5 @@ namespace Honor.ContactManager
             else if (IsValidEmail(Email) == false)
                 yield return new ValidationResult("Email is not properly formatted.", new[] { nameof(Email) });
         }
-        
-
-
     }
 }

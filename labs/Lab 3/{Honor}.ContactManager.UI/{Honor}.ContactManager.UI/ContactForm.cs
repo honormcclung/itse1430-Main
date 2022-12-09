@@ -9,14 +9,13 @@ namespace _Honor_.ContactManager.UI
 {
     public partial class ContactForm : Form
     {
-        List<string> errorList = new List<string>();
+        List<string> _errorList = new List<string>();
 
         #region Construction
-        public ContactForm ( /*IEnumerable<Contact> contacts*/ )
+        public ContactForm ()
         {
             InitializeComponent();
             AutoValidate = AutoValidate.EnableAllowFocusChange;
-            //IEnumerable<Contact> contactsList = contacts;
         }
 
         #endregion
@@ -44,7 +43,6 @@ namespace _Honor_.ContactManager.UI
 
         private void onSave ( object sender, EventArgs e )
         {
-            //Force validation of children
             if (!ValidateChildren())
                 return;
             var btn = sender as Button;
@@ -55,23 +53,19 @@ namespace _Honor_.ContactManager.UI
             contact.Email = _txtEmail.Text;
             contact.IsFavorite = _chkIsFavorite.Checked;
             contact.Notes = _txtNotes.Text;
-            //contact.Id = contact.GenerateNewId();
 
             if (!ObjectValidator.TryValidate(contact, out var error))
             {
                 DisplayError(error, "Save");
-                ///
-                foreach (var errorMsg in errorList)
+                ////////////////////////////////////////////////////////////////////////////////////
+                foreach (var errorMsg in _errorList)
                 {
                     DisplayError(errorMsg, "Save");
                 }
-                ///
+                /////////////////////////////////////////////////////////////////////////////////////////
                 return;
             };
 
-            //Get rid of form by
-            // setting Form's DialogResult to a reasonable value
-            // Call Close()
             SelectedContact = contact;
             DialogResult = DialogResult.OK;
             Close();
@@ -85,8 +79,6 @@ namespace _Honor_.ContactManager.UI
 
         private void onCancel ( object sender, EventArgs e )
         {
-            //DialogResult = DialogResult.OK;
-            //Close();
             DialogResult = DialogResult.Cancel;
         }
 
@@ -101,17 +93,12 @@ namespace _Honor_.ContactManager.UI
 
             if (IsValidEmail(control.Text) == false)
             {
-                //e.Cancel = true;
-                //control.Focus();
                 _errors.SetError(control, "Email is not valid");
-                errorList.Add("Email is not valid");
+                _errorList.Add("Email is not valid");
                 e.Cancel = true;
             } else
             {
-                //Valid
-                //e.Cancel = true;
                 _errors.SetError(control, "");
-                //e.Cancel = true;
             }
         }
 
@@ -121,21 +108,10 @@ namespace _Honor_.ContactManager.UI
 
             if (String.IsNullOrEmpty(control.Text))
             {
-                //Not valid
-                //e.Cancel = true;
-                //control.Focus();
                 _errors.SetError(control, "Last name is required");
-                errorList.Add("Last name is required");
+                _errorList.Add("Last name is required");
                 e.Cancel = true;
-                //e.Cancel = true;
-            } /*else if ( == null)
-            {
-                //Valid
-                //e.Cancel = true;
-                _errors.SetError(control, "Last name must be unique");
-                errorList.Add("Last name muyst be unique");
-                //e.Cancel = true;
-            } */else
+            } else
             {
                 _errors.SetError(control, "");
             }
