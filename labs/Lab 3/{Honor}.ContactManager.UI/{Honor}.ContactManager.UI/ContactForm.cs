@@ -1,25 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.ComponentModel.DataAnnotations;
-using System.Data;
-using System.Drawing;
-using System.Linq;
+﻿using System.ComponentModel;
 using System.Net.Mail;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
+using Button = System.Windows.Forms.Button;
+using TextBox = System.Windows.Forms.TextBox;
 
 using Honor.ContactManager;
-
-using Microsoft.VisualBasic.Devices;
-
-using static System.Windows.Forms.VisualStyles.VisualStyleElement;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement.ListView;
-
-using Button = System.Windows.Forms.Button;
-using ListView = System.Windows.Forms.ListView;
-using TextBox = System.Windows.Forms.TextBox;
 
 namespace _Honor_.ContactManager.UI
 {
@@ -57,84 +41,6 @@ namespace _Honor_.ContactManager.UI
         }
 
         #endregion
-        private void onValidateLastName_TextChanged ( object sender, EventArgs e )
-        {
-        }
-
-        private void _btnSave_Click ( object sender, EventArgs e )
-        {
-
-        }
-
-        private void _btnCancel_Click ( object sender, EventArgs e )
-        {
-
-        }
-        /*
-        private void _txtLastName_Validating ( object sender, CancelEventArgs e )
-        {
-            var control = sender as TextBox;
-
-            //Contact contact = sender as Contact;
-
-            //var existing = _contacts.Get(contact.Id);
-            //var existing = Get(sender.Id);
-
-
-
-            if (String.IsNullOrEmpty(control.Text))
-            {
-                //Not valid
-                //e.Cancel = true;
-                //control.Focus();
-                _errors.SetError(control, "Last name is required");
-                e.Cancel = true;
-            //} if (existing != null) {
-            //    _errors.SetError(control, "Last name must be unique");
-            } else
-            {
-                //Valid
-                //e.Cancel = true;
-                _errors.SetError(control, "");
-                //e.Cancel = true;
-            };
-        }
-        */
-
-        private void _txtFirstName_Validating ( object sender, CancelEventArgs e )
-        {
-            
-        }
-        /*
-        private void _txtEmail_Validating ( object sender, CancelEventArgs e )
-        {
-            var control = sender as TextBox;
-
-            bool IsValidEmail ( string source )
-            {
-                return MailAddress.TryCreate(source, out var address);
-            }
-
-            if (IsValidEmail(control.Text) == false)
-            {
-                //e.Cancel = true;
-                //control.Focus();
-                _errors.SetError(control, "Email is not valid");
-                e.Cancel = true;
-            } else
-            {
-                //Valid
-                //e.Cancel = true;
-                _errors.SetError(control, "");
-                //e.Cancel = true;
-            }
-        }
-        */
-
-        private void label4_Validating ( object sender, EventArgs e )
-        {
-
-        }
 
         private void onSave ( object sender, EventArgs e )
         {
@@ -151,23 +57,15 @@ namespace _Honor_.ContactManager.UI
             contact.Notes = _txtNotes.Text;
             //contact.Id = contact.GenerateNewId();
 
-            //var EnteredContact = 
-
-            //Add(Contact contact);
-
-
-            //var validator = new ObjectValidator();            
-            //if (!movie.Validate(out var error))
-            //if (!new ObjectValidator().IsValid(movie, out var error))
-            if (!ObjectValidator.IsValid(contact, out var error))
+            if (!ObjectValidator.TryValidate(contact, out var error))
             {
                 DisplayError(error, "Save");
-                /*
+                ///
                 foreach (var errorMsg in errorList)
                 {
                     DisplayError(errorMsg, "Save");
                 }
-                */
+                ///
                 return;
             };
 
@@ -175,10 +73,6 @@ namespace _Honor_.ContactManager.UI
             // setting Form's DialogResult to a reasonable value
             // Call Close()
             SelectedContact = contact;
-            //ListView listView = new ListView();
-            //ListView.View = View.Details;
-            //var item = new ListViewItem(new string[] { contact.LastName, contact.FirstName, contact.Email });
-            //ListViewContacts.Items.Add(item);
             DialogResult = DialogResult.OK;
             Close();
 
@@ -221,11 +115,6 @@ namespace _Honor_.ContactManager.UI
             }
         }
 
-        private void onLastNameChanged ( object sender, EventArgs e )
-        {
-
-        }
-
         private void onLastNameValidating ( object sender, CancelEventArgs e )
         {
             var control = sender as TextBox;
@@ -250,11 +139,6 @@ namespace _Honor_.ContactManager.UI
             {
                 _errors.SetError(control, "");
             }
-        }
-
-        private void onValidatingIsFavorite ( object sender, CancelEventArgs e )
-        {
-
         }
     }
 }

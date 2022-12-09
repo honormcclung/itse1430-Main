@@ -41,7 +41,6 @@ namespace Honor.ContactManager
         /// Fails if:
         ///    - Id is less than 1
         /// </remarks>
-        //Contact Get ( ObjectId id );
         Contact Get ( int id );
 
         /// <summary>Gets all the contacts.</summary>

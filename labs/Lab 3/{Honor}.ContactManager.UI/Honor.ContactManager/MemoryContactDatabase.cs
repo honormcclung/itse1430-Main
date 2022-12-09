@@ -14,10 +14,6 @@ namespace Honor.ContactManager
         /// <returns>The new contact.</returns>
         protected override Contact AddCore ( Contact contact )
         {
-            //_contacts.Add(contact);
-
-            //return contact;
-
             //Add
             contact.Id = _id++;
             _contacts.Add(contact.Clone());
@@ -35,10 +31,7 @@ namespace Honor.ContactManager
             {
                 if (contact.Id == id)
                 {
-                    //newContact = contact;
-                    //contactExists = true;
                     return contact;
-                    break;
                 }
             }
 
@@ -60,9 +53,6 @@ namespace Honor.ContactManager
             {
                 if (contact.Id == id)
                 {
-                    //newContact = contact;
-                    //contactExists = true;
-                    //return contact;
                     _contacts.Remove(contact);
                     break;
                 }
@@ -78,9 +68,6 @@ namespace Honor.ContactManager
             {
                 if (contact.Id == id)
                 {
-                    //newContact = contact;
-                    //contactExists = true;
-                    //return contact;
                     contact.FirstName = newContact.FirstName;
                     contact.LastName = newContact.LastName;
                     contact.Email = newContact.Email;
@@ -100,10 +87,8 @@ namespace Honor.ContactManager
             {
                 if (contact.LastName == lastName)
                 {
-                    //newContact = contact;
-                    //contactExists = true;
                     return contact;
-                    break;
+                    //break;
                 }
             }
 
@@ -111,41 +96,13 @@ namespace Honor.ContactManager
         }
 
         #region Private Members
-
-        //Action -> Method with no return type
-        // Action<T> -> parameter of T
-        // Action<T1..T16> -> parameters of T1 to T16
-        //Func<R> -> Method with a return type of R
-        // Func<T, R> -> parameter of T
-        // Func<T1..T16, R> -> parameters of T1 to T16
         private Contact FindById ( int id )
         {
-            // Where takes a IEnumerable<T> and returns all items that match the predicate
-            // defined by Func<Movie, bool>
-            //return _movies.Where(FilterById)
-            //              .FirstOrDefault();
-            // If you need extra data then a nested class with the data would be needed
-            // return _movies.FirstOrDefault(new MyHiddenClass(id).FilterById);
-            //return _movies.FirstOrDefault(FilterById);
-
-            //lambda - anonymous method/function
-            //  foo ( Movie x ) { return x.Id == id; }
             return _contacts.FirstOrDefault(x => x.Id == id);
-
-            //foreach (var movie in _movies)
-            //    if (movie.Id == id)
-            //        return movie;
-
-            //return null;
         }
-        //private bool FilterById ( Movie movie )
-        //{
-        //    return true;
-        //}
 
         private int _id = 1;
 
-        //private Movie[] _movies = new Movie[100];
         private List<Contact> _contacts = new List<Contact>();
         #endregion
     }

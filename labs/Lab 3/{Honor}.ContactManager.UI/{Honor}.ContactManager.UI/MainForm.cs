@@ -9,7 +9,6 @@ namespace _Honor_.ContactManager.UI
     public partial class MainForm : Form
     {
         #region Construction
-        //public ContactDatabase _contacts = new ContactDatabase();
 
         ////////
         ///////////
@@ -17,12 +16,6 @@ namespace _Honor_.ContactManager.UI
         ///////////////
         /////////////
         ///
-
-        //List<Contact> contacts = _contacts.GetAll();
-        //_contacts
-
-        //ContactList _contacts = new Honor.ContactManager.ContactList();
-
 
         public MainForm ( )
         {
@@ -35,7 +28,7 @@ namespace _Honor_.ContactManager.UI
         {
             base.OnLoad(e);
 
-            UpdateUI();
+            UpdateUI(true);
         }
 
         #region Event Handlers
@@ -58,104 +51,61 @@ namespace _Honor_.ContactManager.UI
 
             do
             {
-                //Showing form modally
                 if (child.ShowDialog(this) != DialogResult.OK)
                     return;
 
                 if (_contacts.Add(child.SelectedContact, out var error) != null)
                 {
-                    UpdateUI();
-                    return;
+                    break;
                 };
 
-                DisplayError("Error", "Add Failed");
+                DisplayError(error, "Add Failed");
             } while (true);
+
+            UpdateUI();
         }
 
-        private void OnContactsEdit ( object sender, EventArgs e )
+        private void OnContactEdit ( object sender, EventArgs e )
         {
-
+            EditContact();
         }
-
-        private void OnContactsDelete ( object sender, EventArgs e )
+ 
+        private void OnContactDelete ( object sender, EventArgs e )
         {
+            var contact = GetSelectedContact();
+            if (contact == null)
+                return;
 
+            if (MessageBox.Show(this, $"Are you sure you want to delete '{contact.FullName}'?", "Delete", MessageBoxButtons.YesNo, MessageBoxIcon.Question) != DialogResult.Yes)
+                return;
+
+            _contacts.Remove(contact.Id);
+            UpdateUI();
         }
-        /*
-        private void exitToolStripMenuItem_Click ( object sender, EventArgs e )
+
+        private void OnContactDoubleClick ( object sender, MouseEventArgs e )
         {
-            Close();
+            EditContact();
         }
-
-        private void onHelpAbout_Click ( object sender, EventArgs e )
-        {
-            var about = new AboutContactManager();
-
-            about.ShowDialog();
-        }
-
-        private void onContactsAdd_Click ( object sender, EventArgs e )
-        {
-            //var contacts = _contacts.GetAll()
-
-            var child = new ContactForm();
-
-            //var movie = GetSelectedMovie();
-            //if (movie == null)
-                //return;
-
-            //var child = new MovieForm();
-            //child.SelectedMovie = movie;
-
-            do
-            {
-                //Showing form modally
-                if (child.ShowDialog(this) != DialogResult.OK)
-                    return;
-
-                if (_contacts.Add(child.SelectedContact, out var error) != null)
-                {
-                    UpdateUI();
-                    return;
-                };
-
-                DisplayError("Error", "Add Failed");
-            } while (true);
-        }
-
-        private void contactsToolStripMenuItem_Click ( object sender, EventArgs e )
-        {
-
-        }
-        */
 
         #endregion
 
         #region Private Members
-
+        
         private void UpdateUI ()
         {
             UpdateUI(false);
         }
+        
 
         private void UpdateUI ( bool initialLoad )
         {
-            //Get movies
             var contacts = _contacts.GetAll();
-
-            //Extension methods - static methods on static classes
-            // 1. Expose a static method as an instance method for discoverability
-            // 2. Called like instance methods (on an instance)
-            // 3. Compiler rewrites code to call static method on static class
-            //Enumerable.Count(movies) == movies.Count()            
-            if (initialLoad &&
-                    //movies.Count() == 0)
-                    //movies.FirstOrDefault() == null)            
-                    contacts.Any())
+           
+            if (initialLoad == true)
             {
                 if (Confirm("Do you want to seed some movies?", "Database Empty"))
                 {
-                    //SeedMovieDatabase.Seed(_movies);
                     _contacts.Seed();
                     contacts = _contacts.GetAll();
                 };
@@ -165,8 +115,6 @@ namespace _Honor_.ContactManager.UI
 
             var items = contacts.OrderBy(x => x.LastName).ThenBy(x => x.FirstName);
 
-            //foreach (var contact in contacts)
-            //    _lstContacts.Items.Add(new ListViewItem(new string[] {contact.LastName, contact.FirstName, contact.Email}));
             _lstContacts.Items.AddRange(contacts.ToArray());
         }
 
@@ -213,16 +161,12 @@ namespace _Honor_.ContactManager.UI
 
         private readonly IContactDatabase _contacts = new Honor.ContactManager.MemoryContactDatabase();
 
-        //private Contact _contacts;
-        //private IMovieDatabase _movies = new Memory<Movie>.MemoryMovieDatabase();
-        //private IContactDatabase _contacts = new Memory<ContactDatabase>.();
-        //List<Contact> _contacts = new ContactDatabase();
-
         #endregion
 
         private void _lstContacts_SelectedIndexChanged ( object sender, EventArgs e )
         {
 
         }
+
     }
 }

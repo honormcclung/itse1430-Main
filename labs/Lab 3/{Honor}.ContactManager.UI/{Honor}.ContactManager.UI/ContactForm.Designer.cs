@@ -78,8 +78,6 @@
             this._txtLastName.Name = "_txtLastName";
             this._txtLastName.Size = new System.Drawing.Size(224, 31);
             this._txtLastName.TabIndex = 5;
-            this._txtLastName.TextChanged += new System.EventHandler(this.onLastNameChanged);
-            this._txtLastName.Validating += new System.ComponentModel.CancelEventHandler(this.onLastNameValidating);
             // 
             // _txtFirstName
             // 
@@ -104,7 +102,6 @@
             this._chkIsFavorite.Size = new System.Drawing.Size(22, 21);
             this._chkIsFavorite.TabIndex = 8;
             this._chkIsFavorite.UseVisualStyleBackColor = true;
-            this._chkIsFavorite.Validating += new System.ComponentModel.CancelEventHandler(this.onValidatingIsFavorite);
             // 
             // label4
             // 
@@ -114,7 +111,6 @@
             this.label4.Size = new System.Drawing.Size(92, 25);
             this.label4.TabIndex = 9;
             this.label4.Text = "Is Favorite";
-            this.label4.Validating += new System.ComponentModel.CancelEventHandler(this.label4_Validating);
             // 
             // label5
             // 

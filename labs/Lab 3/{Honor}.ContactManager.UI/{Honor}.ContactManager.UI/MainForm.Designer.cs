@@ -36,8 +36,8 @@
             this.contactsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.addToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.editToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.deleteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this._lstContacts = new System.Windows.Forms.ListBox();
+            this.deleteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -99,22 +99,16 @@
             // 
             this.addToolStripMenuItem.Name = "addToolStripMenuItem";
             this.addToolStripMenuItem.ShortcutKeys = System.Windows.Forms.Keys.Insert;
-            this.addToolStripMenuItem.Size = new System.Drawing.Size(202, 34);
+            this.addToolStripMenuItem.Size = new System.Drawing.Size(270, 34);
             this.addToolStripMenuItem.Text = "&Add";
             this.addToolStripMenuItem.Click += new System.EventHandler(this.onContactsAdd);
             // 
             // editToolStripMenuItem
             // 
             this.editToolStripMenuItem.Name = "editToolStripMenuItem";
-            this.editToolStripMenuItem.Size = new System.Drawing.Size(202, 34);
+            this.editToolStripMenuItem.Size = new System.Drawing.Size(270, 34);
             this.editToolStripMenuItem.Text = "&Edit";
-            // 
-            // deleteToolStripMenuItem
-            // 
-            this.deleteToolStripMenuItem.Name = "deleteToolStripMenuItem";
-            this.deleteToolStripMenuItem.ShortcutKeys = System.Windows.Forms.Keys.Delete;
-            this.deleteToolStripMenuItem.Size = new System.Drawing.Size(202, 34);
-            this.deleteToolStripMenuItem.Text = "&Delete";
+            this.editToolStripMenuItem.Click += new System.EventHandler(this.OnContactEdit);
             // 
             // _lstContacts
             // 
@@ -126,8 +120,17 @@
             this._lstContacts.Size = new System.Drawing.Size(800, 417);
             this._lstContacts.TabIndex = 1;
             this._lstContacts.SelectedIndexChanged += new System.EventHandler(this._lstContacts_SelectedIndexChanged);
+            this._lstContacts.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.OnContactDoubleClick);
             // 
-            // Form1
+            // deleteToolStripMenuItem
+            // 
+            this.deleteToolStripMenuItem.Name = "deleteToolStripMenuItem";
+            this.deleteToolStripMenuItem.ShortcutKeys = System.Windows.Forms.Keys.Delete;
+            this.deleteToolStripMenuItem.Size = new System.Drawing.Size(270, 34);
+            this.deleteToolStripMenuItem.Text = "&Delete";
+            this.deleteToolStripMenuItem.Click += new System.EventHandler(this.OnContactDelete);
+            // 
+            // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -135,7 +138,7 @@
             this.Controls.Add(this._lstContacts);
             this.Controls.Add(this.menuStrip1);
             this.MainMenuStrip = this.menuStrip1;
-            this.Name = "Form1";
+            this.Name = "MainForm";
             this.Text = "HonorsContactManager";
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
@@ -156,7 +159,7 @@
         //private ToolStripMenuItem onContactsAdd;
         private System.Windows.Forms.ToolStripMenuItem addToolStripMenuItem;
         private ToolStripMenuItem editToolStripMenuItem;
-        private ToolStripMenuItem deleteToolStripMenuItem;
         private ListBox _lstContacts;
+        private ToolStripMenuItem deleteToolStripMenuItem;
     }
 }

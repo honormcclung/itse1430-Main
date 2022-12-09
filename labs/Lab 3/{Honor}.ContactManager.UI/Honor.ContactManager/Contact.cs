@@ -81,8 +81,8 @@ namespace Honor.ContactManager
         public string FirstName
         {
             //Expression body            
-            get => _firstName ?? "";                 //{ return _title ?? ""; }   
-            set => _firstName = value?.Trim() ?? ""; //{ _title = value?.Trim() ?? ""; }
+            get => _firstName ?? "";                    
+            set => _firstName = value?.Trim() ?? ""; 
         }
         private string _firstName;
 
@@ -90,8 +90,8 @@ namespace Honor.ContactManager
         public string LastName
         {
             //Expression body            
-            get => _lastName ?? "";                 //{ return _title ?? ""; }   
-            set => _lastName = value?.Trim() ?? ""; //{ _title = value?.Trim() ?? ""; }
+            get => _lastName ?? "";                    
+            set => _lastName = value?.Trim() ?? ""; 
         }
         private string _lastName;
 
@@ -106,8 +106,8 @@ namespace Honor.ContactManager
         public string Email
         {
             //Expression body            
-            get => _email ?? "";                 //{ return _title ?? ""; }   
-            set => _email = value?.Trim() ?? ""; //{ _title = value?.Trim() ?? ""; }
+            get => _email ?? "";                   
+            set => _email = value?.Trim() ?? ""; 
         }
         private string _email;
 
@@ -115,8 +115,8 @@ namespace Honor.ContactManager
         public string Notes
         {
             //Expression body            
-            get => _notes ?? "";                 //{ return _title ?? ""; }   
-            set => _notes = value?.Trim() ?? ""; //{ _title = value?.Trim() ?? ""; }
+            get => _notes ?? "";                    
+            set => _notes = value?.Trim() ?? ""; 
         }
         private string _notes;
 

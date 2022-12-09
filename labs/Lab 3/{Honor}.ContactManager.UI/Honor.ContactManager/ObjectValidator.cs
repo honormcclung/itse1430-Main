@@ -11,6 +11,7 @@ namespace Honor.ContactManager
 {
     public static class ObjectValidator
     {
+        /*
         public static bool IsValid ( IValidatableObject instance, out string errorMessage )
         {
             //var used = _unused;
@@ -31,6 +32,7 @@ namespace Honor.ContactManager
         {
             Validator.ValidateObject(instance, new ValidationContext(instance), true);
         }
+        */
         /// <summary>Validates an object.</summary>
         /// <typeparam name="T">The type being validated.</typeparam>
         /// <param name="value">The value.</param>

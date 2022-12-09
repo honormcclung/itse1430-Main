@@ -34,18 +34,25 @@ namespace Honor.ContactManager
             //Use IValidatableObject Luke...
             //ObjectValidator.Validate(contact);
 
-            //Validate movie
+            if (!ObjectValidator.TryValidate(contact, out var error))
+            {
+                errorMessage = error;
+                return null;
+            }
+
+            //Validate contact
             if (contact == null)
             {
                 errorMessage = "Contact cannot be null";
                 return null;
             };
 
-            if (!ObjectValidator.TryValidate(contact, out var error))
+            //Must have last name
+            if (contact.LastName == null || contact.LastName == "")
             {
-                errorMessage = error;
+                errorMessage = "Contact cannot be null";
                 return null;
-            }
+            };
 
             //Must be unique
             //var existing = Get(contact.Id);
