@@ -154,10 +154,10 @@ namespace Honor.ContactManager
         /// <returns>The validation results.</returns>
         public IEnumerable<ValidationResult> Validate ( ValidationContext validationContext )
         {
-            if(String.IsNullOrEmpty(LastName))
+            if(string.IsNullOrEmpty(LastName))
             yield return new ValidationResult("LastName is required.", new[] { nameof(LastName) });
 
-            if (String.IsNullOrEmpty(Email))
+            if (string.IsNullOrEmpty(Email))
                 yield return new ValidationResult("Email is required.", new[] { nameof(Email) });
             else if (IsValidEmail(Email) == false)
                 yield return new ValidationResult("Email is not properly formatted.", new[] { nameof(Email) });
