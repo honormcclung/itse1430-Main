@@ -1,3 +1,5 @@
+using System;
+
 using MovieLibrary;
 
 namespace WinFormsApp2
@@ -189,7 +191,8 @@ namespace WinFormsApp2
         }
 
         //private Movie _movie;
-        private IMovieDatabase _movies = new Memory.MemoryMovieDatabase();
+        private IMovieDatabase _movies = new MovieLibrary.Memory.MemoryMovieDatabase();
+        //private IMovieDatabase _movies = new Memory.MemoryMovieDatabase();
         #endregion        
     }
 }

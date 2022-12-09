@@ -71,6 +71,6 @@ namespace Honor.ContactManager
         ///   - Contact title already exists
         /// </remarks>
         //string Update ( ObjectId id, Contact contact, out string errorMessage );
-        string Update ( int id, Contact contact, out string errorMessage );
+        bool Update ( int id, Contact contact, out string errorMessage );
     }
 }

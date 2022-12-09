@@ -4,7 +4,7 @@ using MongoDB.Bson;
 
 namespace Honor.ContactManager
 {
-    /// <summary>Provides a base implementation of <see cref="IContactDatabase"/>.</summary>
+    /// <summary>Manages a list of contacts.</summary>
     public abstract class ContactDatabase : IContactDatabase
     {
         /*
@@ -41,9 +41,11 @@ namespace Honor.ContactManager
                 return null;
             };
 
-            //Use IValidatableObject Luke...
-            if (!ObjectValidator.IsValid(contact, out errorMessage))
+            if (!ObjectValidator.TryValidate(contact, out var error))
+            {
+                errorMessage = error;
                 return null;
+            }
 
             //Must be unique
             //var existing = Get(contact.Id);
@@ -54,13 +56,16 @@ namespace Honor.ContactManager
             var existing = FindByLastName(contact.LastName);
             if (existing != null)
             {
-                errorMessage = "Movie must be unique";
+                errorMessage = "Contact already exists.";
                 return null;
             };
 
             //Add
             contact = AddCore(contact);
             //_contacts.Add(contact);
+
+            errorMessage = null;
+
             return contact;
         }
 
@@ -96,7 +101,7 @@ namespace Honor.ContactManager
         public IEnumerable<Contact> GetAll ()
         {
             //return _contacts;
-            return GetAllCore();
+            return GetAllCore() ?? Enumerable.Empty<Contact>();
         }
 
         /// <inheritdoc />        
@@ -124,27 +129,29 @@ namespace Honor.ContactManager
         }
 
         /// <inheritdoc />        
-        public string Update ( int id, Contact contact, out string errorMessage )
+        public bool Update ( int id, Contact contact, out string errorMessage )
         {
             //Validate contact
             if (contact == null)
             {
                 errorMessage = "Contact cannot be null";
-                //return false;
-                return errorMessage;
+                return false;
+                //return errorMessage;
             };
 
-            if (!ObjectValidator.IsValid(contact, out errorMessage))
-                //return false;
-                return errorMessage;
+            if (!ObjectValidator.TryValidate(contact, out var error))
+            {
+                errorMessage = error;
+                return false;
+            }; ;
 
             //Contact must already exist
             var oldContact = GetCore(id);
             if (oldContact == null)
             {
-                errorMessage = "Contact does not exist";
-                //return false;
-                return errorMessage;
+                errorMessage = "Contact does not exist.";
+                return false;
+                //return errorMessage;
             };
 
             //Must be unique
@@ -152,9 +159,9 @@ namespace Honor.ContactManager
             var existing = FindByLastName(contact.LastName);
             if (existing != null && existing.Id != id)
             {
-                errorMessage = "Contact must be unique";
-                //return false;
-                return errorMessage;
+                errorMessage = "Contact already exists with the given name.";
+                return false;
+                //return errorMessage;
             };
             /*
             try
@@ -178,11 +185,13 @@ namespace Honor.ContactManager
 
             UpdateCore(id, contact);
 
-            //errorMessage = null;
+            errorMessage = null;
 
-            return errorMessage;
+            //return errorMessage;
+            return true;
         }
 
+        #region Protected Memebers
 
         /// <summary>Adds a contact to the database.</summary>
         /// <param name="contact">The contact to add.</param>
@@ -213,7 +222,7 @@ namespace Honor.ContactManager
         /// <returns>The contact, if any.</returns>
         protected abstract Contact FindByLastName ( string lastName );
 
-
+        #endregion
     }
 }
 

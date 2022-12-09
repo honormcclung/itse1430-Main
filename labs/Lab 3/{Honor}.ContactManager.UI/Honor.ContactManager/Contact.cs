@@ -95,6 +95,13 @@ namespace Honor.ContactManager
         }
         private string _lastName;
 
+        /// <summary>Gets the full name of the contact.</summary>
+        public string FullName
+        {
+            get { return String.Join(" ", FirstName, LastName); }
+        }
+        //private String _fullName;
+
         /// <summary>Gets or sets the email.</summary>
         public string Email
         {
@@ -117,7 +124,10 @@ namespace Honor.ContactManager
         /// <summary>Determines if the contact is a favorite.</summary>
         public bool IsFavorite { get; set; }
 
-        public override string ToString () => LastName; //{ return Title; }
+        public override string ToString ()
+        {
+            return $"{LastName}, {FirstName} ({Email})";
+        }
 
         /// <summary>Clones the existing contact.</summary>
         /// <returns>A copy of the contact.</returns>
@@ -141,8 +151,14 @@ namespace Honor.ContactManager
             contact.IsFavorite = IsFavorite;
         }
 
+        public bool IsValidEmail ( string source )
+        {
+            return MailAddress.TryCreate(source, out var address);
+        }
+
         public IEnumerable<ValidationResult> Validate ( ValidationContext validationContext )
         {
+            /*
             var errors = new List<ValidationResult>();
 
             bool IsValidEmail ( string source )
@@ -163,6 +179,15 @@ namespace Honor.ContactManager
                 errors.Add(new ValidationResult("If contact is favorite is required", new[] { nameof(IsFavorite) }));
 
             return errors;
+            */
+
+            if(String.IsNullOrEmpty(LastName))
+            yield return new ValidationResult("LastName is required.", new[] { nameof(LastName) });
+
+            if (String.IsNullOrEmpty(Email))
+                yield return new ValidationResult("Email is required.", new[] { nameof(Email) });
+            else if (IsValidEmail(Email) == false)
+                yield return new ValidationResult("Email is not properly formatted.", new[] { nameof(Email) });
         }
         
 

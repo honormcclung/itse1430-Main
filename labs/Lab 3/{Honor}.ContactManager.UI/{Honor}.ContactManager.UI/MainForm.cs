@@ -1,15 +1,22 @@
+using System;
+
 using Honor.ContactManager;
 
 using Microsoft.VisualBasic.Devices;
 
 namespace _Honor_.ContactManager.UI
 {
-    public partial class Form1 : Form
+    public partial class MainForm : Form
     {
         #region Construction
         //public ContactDatabase _contacts = new ContactDatabase();
 
-        public ContactDatabase _contacts = new Honor.ContactManager.MemoryContactDatabase();
+        ////////
+        ///////////
+        //public ContactDatabase _contacts = new Honor.ContactManager.MemoryContactDatabase();
+        ///////////////
+        /////////////
+        ///
 
         //List<Contact> contacts = _contacts.GetAll();
         //_contacts
@@ -17,12 +24,64 @@ namespace _Honor_.ContactManager.UI
         //ContactList _contacts = new Honor.ContactManager.ContactList();
 
 
-        public Form1 ( )
+        public MainForm ( )
         {
             InitializeComponent();
         }
 
         #endregion
+
+        protected override void OnLoad ( EventArgs e )
+        {
+            base.OnLoad(e);
+
+            UpdateUI();
+        }
+
+        #region Event Handlers
+
+        private void OnFileExit ( object sender, EventArgs e )
+        {
+            Close();
+        }
+
+        private void onHelpAbout ( object sender, EventArgs e )
+        {
+            var about = new AboutContactManager();
+
+            about.ShowDialog();
+        }
+
+        private void onContactsAdd ( object sender, EventArgs e )
+        {
+            var child = new ContactForm();
+
+            do
+            {
+                //Showing form modally
+                if (child.ShowDialog(this) != DialogResult.OK)
+                    return;
+
+                if (_contacts.Add(child.SelectedContact, out var error) != null)
+                {
+                    UpdateUI();
+                    return;
+                };
+
+                DisplayError("Error", "Add Failed");
+            } while (true);
+        }
+
+        private void OnContactsEdit ( object sender, EventArgs e )
+        {
+
+        }
+
+        private void OnContactsDelete ( object sender, EventArgs e )
+        {
+
+        }
+        /*
         private void exitToolStripMenuItem_Click ( object sender, EventArgs e )
         {
             Close();
@@ -68,6 +127,11 @@ namespace _Honor_.ContactManager.UI
         {
 
         }
+        */
+
+        #endregion
+
+        #region Private Members
 
         private void UpdateUI ()
         {
@@ -99,27 +163,11 @@ namespace _Honor_.ContactManager.UI
 
             _lstContacts.Items.Clear();
 
-            //Order movies by title, then by release year
-            //Chain calls together
-            //          movies.OrderBy(OrderByTitle());
-            //  foreach item in source
-            //      sortValue = func(item)
-            //      compare sortValue to other values
-            //var items = movies.OrderBy(OrderByTitle)
-            //               .ThenBy(OrderByReleaseYear)
-            var items = contacts.OrderBy(x => x.LastName)
-                              .ThenBy(x => x.FirstName)
-                              .ToList();
-            //movies = movies.ThenBy();
+            var items = contacts.OrderBy(x => x.LastName).ThenBy(x => x.FirstName);
 
-            //Use Enumerable 
-            //_lstContacts.Items.AddRange(Enumerable.ToArray(contacts));
-
-            //_lstContacts.Items.AddRange(items);
-            //_contacts.AddRange(items);
-
-            foreach (var contact in contacts)
-                _lstContacts.Items.Add(new ListViewItem(new string[] {contact.LastName, contact.FirstName, contact.Email}));
+            //foreach (var contact in contacts)
+            //    _lstContacts.Items.Add(new ListViewItem(new string[] {contact.LastName, contact.FirstName, contact.Email}));
+            _lstContacts.Items.AddRange(contacts.ToArray());
         }
 
         private bool Confirm ( string message, string title )
@@ -133,10 +181,48 @@ namespace _Honor_.ContactManager.UI
         {
             MessageBox.Show(this, message, title, MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
+        
+        private Contact GetSelectedContact ()
+        {
+            return _lstContacts.SelectedItem as Contact;
+        }
+        
+
+        private void EditContact ()
+        {
+            
+            var contact = GetSelectedContact();
+            if (contact == null)
+                return;
+
+            var form = new ContactForm() { SelectedContact = contact };
+            while (true)
+            {
+                if (form.ShowDialog(this) != DialogResult.OK)
+                    return;
+
+                if (_contacts.Update(contact.Id, form.SelectedContact, out var error))
+                    break;
+
+                DisplayError("Updated Failed", error);
+            };
+
+            UpdateUI();
+            
+        }
+
+        private readonly IContactDatabase _contacts = new Honor.ContactManager.MemoryContactDatabase();
 
         //private Contact _contacts;
         //private IMovieDatabase _movies = new Memory<Movie>.MemoryMovieDatabase();
         //private IContactDatabase _contacts = new Memory<ContactDatabase>.();
         //List<Contact> _contacts = new ContactDatabase();
+
+        #endregion
+
+        private void _lstContacts_SelectedIndexChanged ( object sender, EventArgs e )
+        {
+
+        }
     }
 }

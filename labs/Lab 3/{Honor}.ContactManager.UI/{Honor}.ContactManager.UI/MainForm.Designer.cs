@@ -1,6 +1,6 @@
 ﻿namespace _Honor_.ContactManager.UI
 {
-    partial class Form1
+    partial class MainForm
     {
         /// <summary>
         ///  Required designer variable.
@@ -32,13 +32,12 @@
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.onHelpAbout = new System.Windows.Forms.ToolStripMenuItem();
+            this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.contactsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.onContactsAdd = new System.Windows.Forms.ToolStripMenuItem();
-            this._lstContacts = new System.Windows.Forms.ListView();
-            this.ListViewLastName = new System.Windows.Forms.ColumnHeader();
-            this.ListViewFirstName = new System.Windows.Forms.ColumnHeader();
-            this.ListViewEmail = new System.Windows.Forms.ColumnHeader();
+            this.addToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.editToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.deleteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this._lstContacts = new System.Windows.Forms.ListBox();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -61,73 +60,72 @@
             this.exitToolStripMenuItem});
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
             this.fileToolStripMenuItem.Size = new System.Drawing.Size(54, 29);
-            this.fileToolStripMenuItem.Text = "File";
+            this.fileToolStripMenuItem.Text = "&File";
             // 
             // exitToolStripMenuItem
             // 
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
             this.exitToolStripMenuItem.Size = new System.Drawing.Size(141, 34);
-            this.exitToolStripMenuItem.Text = "Exit";
-            this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
+            this.exitToolStripMenuItem.Text = "&Exit";
+            this.exitToolStripMenuItem.Click += new System.EventHandler(this.OnFileExit);
             // 
             // helpToolStripMenuItem
             // 
             this.helpToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.onHelpAbout});
+            this.aboutToolStripMenuItem});
             this.helpToolStripMenuItem.Name = "helpToolStripMenuItem";
             this.helpToolStripMenuItem.Size = new System.Drawing.Size(65, 29);
-            this.helpToolStripMenuItem.Text = "Help";
+            this.helpToolStripMenuItem.Text = "&Help";
             // 
-            // onHelpAbout
+            // aboutToolStripMenuItem
             // 
-            this.onHelpAbout.Name = "onHelpAbout";
-            this.onHelpAbout.Size = new System.Drawing.Size(164, 34);
-            this.onHelpAbout.Text = "About";
-            this.onHelpAbout.Click += new System.EventHandler(this.onHelpAbout_Click);
+            this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
+            this.aboutToolStripMenuItem.ShortcutKeys = System.Windows.Forms.Keys.F1;
+            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(195, 34);
+            this.aboutToolStripMenuItem.Text = "&About";
+            this.aboutToolStripMenuItem.Click += new System.EventHandler(this.onHelpAbout);
             // 
             // contactsToolStripMenuItem
             // 
             this.contactsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.onContactsAdd});
+            this.addToolStripMenuItem,
+            this.editToolStripMenuItem,
+            this.deleteToolStripMenuItem});
             this.contactsToolStripMenuItem.Name = "contactsToolStripMenuItem";
             this.contactsToolStripMenuItem.Size = new System.Drawing.Size(97, 29);
-            this.contactsToolStripMenuItem.Text = "Contacts";
-            this.contactsToolStripMenuItem.Click += new System.EventHandler(this.contactsToolStripMenuItem_Click);
+            this.contactsToolStripMenuItem.Text = "&Contacts";
             // 
-            // onContactsAdd
+            // addToolStripMenuItem
             // 
-            this.onContactsAdd.Name = "onContactsAdd";
-            this.onContactsAdd.Size = new System.Drawing.Size(148, 34);
-            this.onContactsAdd.Text = "Add";
-            this.onContactsAdd.Click += new System.EventHandler(this.onContactsAdd_Click);
+            this.addToolStripMenuItem.Name = "addToolStripMenuItem";
+            this.addToolStripMenuItem.ShortcutKeys = System.Windows.Forms.Keys.Insert;
+            this.addToolStripMenuItem.Size = new System.Drawing.Size(202, 34);
+            this.addToolStripMenuItem.Text = "&Add";
+            this.addToolStripMenuItem.Click += new System.EventHandler(this.onContactsAdd);
+            // 
+            // editToolStripMenuItem
+            // 
+            this.editToolStripMenuItem.Name = "editToolStripMenuItem";
+            this.editToolStripMenuItem.Size = new System.Drawing.Size(202, 34);
+            this.editToolStripMenuItem.Text = "&Edit";
+            // 
+            // deleteToolStripMenuItem
+            // 
+            this.deleteToolStripMenuItem.Name = "deleteToolStripMenuItem";
+            this.deleteToolStripMenuItem.ShortcutKeys = System.Windows.Forms.Keys.Delete;
+            this.deleteToolStripMenuItem.Size = new System.Drawing.Size(202, 34);
+            this.deleteToolStripMenuItem.Text = "&Delete";
             // 
             // _lstContacts
             // 
-            this._lstContacts.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.ListViewLastName,
-            this.ListViewFirstName,
-            this.ListViewEmail});
-            this._lstContacts.Location = new System.Drawing.Point(32, 69);
+            this._lstContacts.Dock = System.Windows.Forms.DockStyle.Fill;
+            this._lstContacts.ItemHeight = 25;
+            this._lstContacts.Location = new System.Drawing.Point(0, 33);
+            this._lstContacts.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this._lstContacts.Name = "_lstContacts";
-            this._lstContacts.Size = new System.Drawing.Size(717, 348);
+            this._lstContacts.Size = new System.Drawing.Size(800, 417);
             this._lstContacts.TabIndex = 1;
-            this._lstContacts.UseCompatibleStateImageBehavior = false;
-            this._lstContacts.View = System.Windows.Forms.View.Details;
-            // 
-            // ListViewLastName
-            // 
-            this.ListViewLastName.Text = "Last Name";
-            this.ListViewLastName.Width = 220;
-            // 
-            // ListViewFirstName
-            // 
-            this.ListViewFirstName.Text = "FirstName";
-            this.ListViewFirstName.Width = 200;
-            // 
-            // ListViewEmail
-            // 
-            this.ListViewEmail.Text = "ListViewEmail";
-            this.ListViewEmail.Width = 300;
+            this._lstContacts.SelectedIndexChanged += new System.EventHandler(this._lstContacts_SelectedIndexChanged);
             // 
             // Form1
             // 
@@ -152,12 +150,13 @@
         private ToolStripMenuItem fileToolStripMenuItem;
         private ToolStripMenuItem exitToolStripMenuItem;
         private ToolStripMenuItem helpToolStripMenuItem;
-        private ToolStripMenuItem onHelpAbout;
+        //private ToolStripMenuItem onHelpAbout;
+        private System.Windows.Forms.ToolStripMenuItem aboutToolStripMenuItem;
         private ToolStripMenuItem contactsToolStripMenuItem;
-        private ToolStripMenuItem onContactsAdd;
-        private ListView _lstContacts;
-        private ColumnHeader ListViewLastName;
-        private ColumnHeader ListViewFirstName;
-        private ColumnHeader ListViewEmail;
+        //private ToolStripMenuItem onContactsAdd;
+        private System.Windows.Forms.ToolStripMenuItem addToolStripMenuItem;
+        private ToolStripMenuItem editToolStripMenuItem;
+        private ToolStripMenuItem deleteToolStripMenuItem;
+        private ListBox _lstContacts;
     }
 }

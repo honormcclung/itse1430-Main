@@ -26,6 +26,8 @@ namespace _Honor_.ContactManager.UI
     public partial class ContactForm : Form
     {
         List<string> errorList = new List<string>();
+
+        #region Construction
         public ContactForm ( /*IEnumerable<Contact> contacts*/ )
         {
             InitializeComponent();
@@ -33,9 +35,28 @@ namespace _Honor_.ContactManager.UI
             //IEnumerable<Contact> contactsList = contacts;
         }
 
+        #endregion
+
         /// <summary>Gets or sets the movie being edited.</summary>
         public Contact SelectedContact { get; set; }
 
+        #region Protected Members
+        protected override void OnLoad ( EventArgs e )
+        {
+            base.OnLoad(e);
+
+            if (SelectedContact != null)
+            {
+                _txtFirstName.Text = SelectedContact.FirstName;
+                _txtLastName.Text = SelectedContact.LastName;
+                _txtEmail.Text = SelectedContact.Email;
+
+                _txtNotes.Text = SelectedContact.Notes;
+                _chkIsFavorite.Checked = SelectedContact.IsFavorite;
+            };
+        }
+
+        #endregion
         private void onValidateLastName_TextChanged ( object sender, EventArgs e )
         {
         }
