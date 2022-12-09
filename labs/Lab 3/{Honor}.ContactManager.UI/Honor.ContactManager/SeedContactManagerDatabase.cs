@@ -9,11 +9,10 @@ namespace Honor.ContactManager
 {
     public static class ContactDatabaseExtensions
     {
-        // Extension method requirements
-        //  1. public/internal static class
-        //  2. public/internal static method
-        //  3. First parameter must be the extended type
-        //  4. First parameter must be proceeded by this
+        /// <summary>Validates an object.</summary>
+        /// <typeparam name="IContactDatabase">The type being validated.</typeparam>
+        /// <param name="errorMessage">The error message.</param>
+        /// <returns><see langword="true"/> if valid or <see langword="false"/> otherwise.</returns>
         public static void Seed ( this IContactDatabase database )
         {
             List<Contact> contactList = new List<Contact> {

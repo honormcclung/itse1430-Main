@@ -112,6 +112,8 @@ namespace Honor.ContactManager
         /// <summary>Determines if the contact is a favorite.</summary>
         public bool IsFavorite { get; set; }
 
+        /// <summary>Converts the contact information to a string.</summary>
+        /// <returns>A string of comtact information.</returns>
         public override string ToString ()
         {
                 return $"{LastName},{FirstName} ({Email})";
@@ -139,11 +141,17 @@ namespace Honor.ContactManager
             contact.IsFavorite = IsFavorite;
         }
 
+        /// <summary>Checks if email is valid.</summary>
+        /// <param name="source">Email address.</param>
+        /// <returns>Boolean on whether contact is valid.</returns>
         public bool IsValidEmail ( string source )
         {
             return MailAddress.TryCreate(source, out var address);
         }
 
+        /// <summary>Validates the object.</summary>
+        /// <param name="validationContext">The context.</param>
+        /// <returns>The validation results.</returns>
         public IEnumerable<ValidationResult> Validate ( ValidationContext validationContext )
         {
             if(String.IsNullOrEmpty(LastName))

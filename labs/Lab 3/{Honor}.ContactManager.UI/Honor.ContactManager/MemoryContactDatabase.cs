@@ -7,6 +7,7 @@
 
 namespace Honor.ContactManager
 {
+    /// <summary>Manages a list of contacts in memory.</summary>
     public class MemoryContactDatabase: ContactDatabase
     {
         /// <summary>Adds a contact to the database.</summary>

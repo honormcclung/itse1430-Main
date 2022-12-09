@@ -11,6 +11,9 @@ namespace _Honor_.ContactManager.UI
 {
     partial class AboutContactManager : Form
     {
+        /// <summary>Copy the contact to another instance.</summary>
+        /// <param name="contact">Contact to copy into.</param>
+        /// <returns>A copy of the contact.</returns>
         public AboutContactManager ()
         {
             InitializeComponent();

@@ -32,6 +32,7 @@ namespace Honor.ContactManager
         Contact Get ( int id );
 
         /// <summary>Gets all the contacts.</summary>
+        /// <typeparam name="Contact">The type being returned.</typeparam>
         /// <returns>The contacts.</returns>        
         IEnumerable<Contact> GetAll ();
 
