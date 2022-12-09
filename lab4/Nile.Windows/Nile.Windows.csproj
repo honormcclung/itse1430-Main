@@ -6,6 +6,9 @@
     <Nullable>disable</Nullable>
     <UseWindowsForms>true</UseWindowsForms>
     <ImplicitUsings>enable</ImplicitUsings>
+    <Authors>Honor McClung</Authors>
+    <Product>Nile </Product>
+    <Description>This application manages a product inventory.</Description>
   </PropertyGroup>
 
   <ItemGroup>
