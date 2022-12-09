@@ -1,9 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Security.Cryptography;
-using System.Text;
-using System.Threading.Tasks;
+﻿/*
+ * Honor McClung
+ * Lab 3
+ * ISTE 1430 - Fall 2022 
+ * 12/1/2022
+ */
 
 namespace Honor.ContactManager
 {
@@ -103,6 +103,7 @@ namespace Honor.ContactManager
         private int _id = 1;
 
         private List<Contact> _contacts = new List<Contact>();
+
         #endregion
     }
 }

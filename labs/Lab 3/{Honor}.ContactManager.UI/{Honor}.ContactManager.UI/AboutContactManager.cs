@@ -1,11 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
-using System.Linq;
-using System.Reflection;
-using System.Threading.Tasks;
-using System.Windows.Forms;
+﻿using System.Reflection;
+
+/*
+ * Honor McClung
+ * Lab 3
+ * ISTE 1430 - Fall 2022 
+ * 12/1/2022
+ */
 
 namespace _Honor_.ContactManager.UI
 {

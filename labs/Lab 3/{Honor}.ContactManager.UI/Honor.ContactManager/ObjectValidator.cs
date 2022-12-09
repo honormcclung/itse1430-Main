@@ -1,11 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
+﻿/*
+ * Honor McClung
+ * Lab 3
+ * ISTE 1430 - Fall 2022 
+ * 12/1/2022
+ */
+
 using System.Collections.ObjectModel;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Net.Mail;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Honor.ContactManager
 {

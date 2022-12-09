@@ -1,8 +1,11 @@
-using System;
-
 using Honor.ContactManager;
 
-using Microsoft.VisualBasic.Devices;
+/*
+ * Honor McClung
+ * Lab 3
+ * ISTE 1430 - Fall 2022 
+ * 12/1/2022
+ */
 
 namespace _Honor_.ContactManager.UI
 {

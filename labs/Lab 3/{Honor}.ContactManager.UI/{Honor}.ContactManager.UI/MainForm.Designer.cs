@@ -1,4 +1,11 @@
-﻿namespace _Honor_.ContactManager.UI
+﻿/*
+ * Honor McClung
+ * Lab 3
+ * ISTE 1430 - Fall 2022 
+ * 12/1/2022
+ */
+
+namespace _Honor_.ContactManager.UI
 {
     partial class MainForm
     {
@@ -153,10 +160,8 @@
         private ToolStripMenuItem fileToolStripMenuItem;
         private ToolStripMenuItem exitToolStripMenuItem;
         private ToolStripMenuItem helpToolStripMenuItem;
-        //private ToolStripMenuItem onHelpAbout;
         private System.Windows.Forms.ToolStripMenuItem aboutToolStripMenuItem;
         private ToolStripMenuItem contactsToolStripMenuItem;
-        //private ToolStripMenuItem onContactsAdd;
         private System.Windows.Forms.ToolStripMenuItem addToolStripMenuItem;
         private ToolStripMenuItem editToolStripMenuItem;
         private ListBox _lstContacts;

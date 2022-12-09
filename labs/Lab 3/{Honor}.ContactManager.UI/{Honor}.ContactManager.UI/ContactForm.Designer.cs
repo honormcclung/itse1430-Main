@@ -1,4 +1,11 @@
-﻿namespace _Honor_.ContactManager.UI
+﻿/*
+ * Honor McClung
+ * Lab 3
+ * ISTE 1430 - Fall 2022 
+ * 12/1/2022
+ */
+
+namespace _Honor_.ContactManager.UI
 {
     partial class ContactForm
     {
