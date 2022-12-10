@@ -1,4 +1,11 @@
-﻿using System.Data;
+﻿/*
+ * Honor McClung
+ * Lab 4
+ * ISTE 1430 - Fall 2022 
+ * 12/9/2022
+ */
+
+using System.Data;
 using System.Data.SqlClient;
 
 namespace Nile.Stores.Sql

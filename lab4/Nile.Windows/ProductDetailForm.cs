@@ -1,9 +1,10 @@
 /*
- * ITSE 1430
+ * Honor McClung
+ * Lab 4
+ * ISTE 1430 - Fall 2022 
+ * 12/9/2022
  */
 using System.ComponentModel;
-
-using Microsoft.VisualBasic.Devices;
 
 namespace Nile.Windows
 {

@@ -1,3 +1,10 @@
+/*
+ * Honor McClung
+ * Lab 4
+ * ISTE 1430 - Fall 2022 
+ * 12/9/2022
+ */
+
 namespace Nile.Windows
 {
     partial class MainForm
