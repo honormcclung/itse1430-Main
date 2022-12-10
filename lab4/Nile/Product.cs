@@ -43,25 +43,11 @@ namespace Nile
 
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {
-            /*
-            var errors = new List<ValidationResult>();
-
-            if (Id < 0)
-                errors.Add(new ValidationResult("Id must be greater than or equal to zero.", new[] { nameof(Id) }));
-            if (Price < 0)
-                errors.Add(new ValidationResult("Price must be greater than or equal to zero.", new[] { nameof(Id) }));
-            if (string.IsNullOrEmpty(Name))
-                errors.Add(new ValidationResult("LastName is required.", new[] { nameof(Name) }));
-
-            return errors;
-            */
-          
-
             if (Id < 0)
                 yield return new ValidationResult("Id must be greater than or equal to zero.", new[] { nameof(Id) });
             if (Price < 0)
                 yield return new ValidationResult("Price must be greater than or equal to zero.", new[] { nameof(Id) });
-            if (string.IsNullOrEmpty(Name))
+            if (String.IsNullOrEmpty(Name))
                 yield return new ValidationResult("LastName is required.", new[] { nameof(Name) });
             
         }

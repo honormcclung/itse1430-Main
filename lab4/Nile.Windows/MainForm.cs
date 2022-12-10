@@ -91,7 +91,6 @@ namespace Nile.Windows
         {
             var grid = sender as DataGridView;
 
-            //Handle column clicks
             if (e.RowIndex < 0)
                 return;
 
@@ -111,7 +110,6 @@ namespace Nile.Windows
             if (product != null)
                 DeleteProduct(product);
 			
-			//Don't continue with key
             e.SuppressKeyPress = true;
         }
 
@@ -121,7 +119,6 @@ namespace Nile.Windows
 
         private void DeleteProduct ( Product product )
         {
-            //Confirm
             if (MessageBox.Show(this, $"Are you sure you want to delete '{product.Name}'?",
                                 "Delete", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No)
                 return;
@@ -139,9 +136,6 @@ namespace Nile.Windows
             {
                 DisplayError(ex.Message, "Delete Failed");
             };
-
-            //_database.Remove(product.Id);
-            //UpdateList();
         }
 
         private void EditProduct ( Product product )
@@ -175,9 +169,6 @@ namespace Nile.Windows
                     Cursor = Cursors.Default;
                 };
             } while (true);
-
-            //_database.Update(child.Product);
-            //UpdateList();
         }
 
         private Product GetSelectedProduct ()
@@ -200,8 +191,6 @@ namespace Nile.Windows
             {
                 DisplayError(ex.Message, "Update List Failed.");
             }
-
-            //_bsProducts.DataSource = _database.GetAll();
         }       
 
         private void OnHelpAbout ( object sender, EventArgs e )

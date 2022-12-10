@@ -13,27 +13,19 @@ namespace Nile.Stores
         public Product Add ( Product product )
         {
             //TODO: Check arguments
-
             //TODO: Validate product
-            //var errors = product.Validate();
 
-            //Validate movie
             if (product.Name == null)
                 throw new ArgumentNullException(nameof(product));
 
-            //Use IValidatableObject Luke...
             ObjectValidator.Validate(product);
 
-            
-            //Must be unique
             var existing = GetAll().FirstOrDefault(
                         x => String.Equals(x.Name, product.Name, StringComparison.OrdinalIgnoreCase));
             
             if (existing != null && existing.Id != product.Id)
                 throw new InvalidOperationException("Product name must be unique.");
             
-
-            //Emulate database by storing copy
             return AddCore(product);
         }
 
@@ -75,7 +67,6 @@ namespace Nile.Stores
             if (product == null)
                 throw new ArgumentNullException(nameof(product), "Product does not exist.");
 
-            //Must be unique
             var productExists = GetAll().FirstOrDefault(
                         x => String.Equals(x.Name, product.Name, StringComparison.OrdinalIgnoreCase));
 
@@ -84,7 +75,6 @@ namespace Nile.Stores
 
             ObjectValidator.Validate(product);
 
-            //Get existing product
             var existing = GetCore(product.Id);
 
             return UpdateCore(existing, product);
@@ -92,14 +82,27 @@ namespace Nile.Stores
 
         #region Protected Members
 
+        /// <summary>Gets a product by ID.</summary>
+        /// <param name="id">The ID of the product.</param>
+        /// <returns>The product, if any.</returns>
         protected abstract Product GetCore( int id );
 
+        /// <summary>Gets all products.</summary>
+        /// <returns>The list of products.</returns>
         protected abstract IEnumerable<Product> GetAllCore();
 
+        /// <summary>Removes a product given its ID.</summary>
+        /// <param name="id">The product ID.</param>
         protected abstract void RemoveCore( int id );
 
+        /// <summary>Updates an existing product.</summary>
+        /// <param name="id">The product ID.</param>
+        /// <param name="contact">The product details.</param>
         protected abstract Product UpdateCore( Product existing, Product newItem );
 
+        /// <summary>Adds a product to the database.</summary>
+        /// <param name="id">The product to add.</param>
+        /// <returns>The new product.</returns>
         protected abstract Product AddCore( Product product );
         #endregion
     }
