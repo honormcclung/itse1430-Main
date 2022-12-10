@@ -82,6 +82,18 @@ namespace Nile.Stores
             return null;
         }
 
+        //Uses Id to determine if product already exists.
+        private bool IsExistingProduct ( int id )
+        {
+            foreach (var product in _products)
+            {
+                if (product.Id == id)
+                    return true;
+            };
+
+            return false;
+        }
+
         private List<Product> _products = new List<Product>();
         private int _nextId = 1;
         #endregion

@@ -1,6 +1,11 @@
 /*
  * ITSE 1430
  */
+using System.ComponentModel;
+using System.Windows.Forms;
+
+using Microsoft.VisualBasic.Devices;
+
 namespace Nile.Windows
 {
     public partial class MainForm : Form
@@ -17,7 +22,7 @@ namespace Nile.Windows
         {
             base.OnLoad(e);
 
-            _gridProducts.AutoGenerateColumns = false;
+            _gridProducts.AutoGenerateColumns = true;
 
             var connString = Program.GetConnectionString("ProductDatabase");
             UpdateList();
@@ -33,18 +38,33 @@ namespace Nile.Windows
         private void OnProductAdd( object sender, EventArgs e )
         {
             var child = new ProductDetailForm("Product Details");
-            if (child.ShowDialog(this) != DialogResult.OK)
-                return;
 
             //TODO: Handle errors
             //Save product
-            _database.Add(child.Product);
-            UpdateList();
+            do
+            {
+                if (child.ShowDialog(this) != DialogResult.OK)
+                    return;
+                try
+                {
+                    _database.Add(child.Product);
+                    UpdateList();
+                    return;
+                } catch (InvalidOperationException ex)
+                {
+                    DisplayError("Products must be unique.", "Add Failed");
+                } catch (Exception ex)
+                {
+                    DisplayError(ex.Message, "Add Failed");
+                };
+
+            } while (true);
         }
 
         private void OnProductEdit( object sender, EventArgs e )
         {
             var product = GetSelectedProduct();
+
             if (product == null)
             {
                 MessageBox.Show("No products available.");
@@ -57,6 +77,7 @@ namespace Nile.Windows
         private void OnProductDelete( object sender, EventArgs e )
         {
             var product = GetSelectedProduct();
+
             if (product == null)
                 return;
 
@@ -104,21 +125,56 @@ namespace Nile.Windows
 
             //TODO: Handle errors
             //Delete product
-            _database.Remove(product.Id);
-            UpdateList();
+            if (product == null)
+                throw new InvalidOperationException("Product does not exist.");
+
+            try
+            {
+                _database.Remove(product.Id);
+                UpdateList();
+            } catch (Exception ex)
+            {
+                DisplayError(ex.Message, "Delete Failed");
+            };
+
+            //_database.Remove(product.Id);
+            //UpdateList();
         }
 
         private void EditProduct ( Product product )
         {
+            if (product == null)
+                throw new InvalidOperationException("Product does not exist.");
+
             var child = new ProductDetailForm("Product Details");
             child.Product = product;
-            if (child.ShowDialog(this) != DialogResult.OK)
-                return;
+
 
             //TODO: Handle errors
             //Save product
-            _database.Update(child.Product);
-            UpdateList();
+            do
+            {
+                if (child.ShowDialog(this) != DialogResult.OK)
+                    return;
+
+                try
+                {
+                    Cursor = Cursors.WaitCursor;
+                    _database.Update(child.Product);
+                    System.Threading.Thread.Sleep(1000);
+                    UpdateList();
+                    return;
+                } catch (Exception ex)
+                {
+                    DisplayError(ex.Message, "Update Failed");
+                } finally
+                {
+                    Cursor = Cursors.Default;
+                };
+            } while (true);
+
+            //_database.Update(child.Product);
+            //UpdateList();
         }
 
         private Product GetSelectedProduct ()
@@ -132,12 +188,18 @@ namespace Nile.Windows
         private void UpdateList ()
         {
             //TODO: Handle errors
+            try
+            {
+                //_database
+                _bsProducts.DataSource = _database.GetAll().OrderBy(x => x.Name);
+                return;
+            } catch (Exception ex)
+            {
+                DisplayError(ex.Message, "Update List Failed.");
+            }
 
-            _bsProducts.DataSource = _database.GetAll();
-        }
-
-        private readonly IProductDatabase _database = new Nile.Stores.MemoryProductDatabase();
-        #endregion
+            //_bsProducts.DataSource = _database.GetAll();
+        }       
 
         private void OnHelpAbout ( object sender, EventArgs e )
         {
@@ -145,5 +207,15 @@ namespace Nile.Windows
 
             about.ShowDialog();
         }
+
+        private void DisplayError ( string message, string title )
+        {
+            MessageBox.Show(this, message, title, MessageBoxButtons.OK, MessageBoxIcon.Error);
+        }
+
+        private readonly IProductDatabase _database = new Nile.Stores.MemoryProductDatabase();
+
+        #endregion
+
     }
 }

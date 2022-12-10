@@ -3,6 +3,8 @@
  */
 using System.ComponentModel;
 
+using Microsoft.VisualBasic.Devices;
+
 namespace Nile.Windows
 {
     public partial class ProductDetailForm : Form
@@ -68,6 +70,11 @@ namespace Nile.Windows
             };
 
             //TODO: Validate product
+            if (!ObjectValidator.TryValidate(product, out var error))
+            {
+                DisplayError(error, "Save");
+                return;
+            };
 
             Product = product;
             DialogResult = DialogResult.OK;
@@ -103,9 +110,19 @@ namespace Nile.Windows
             if (Decimal.TryParse(control.Text, out var price))
                 return price;
 
-            //Validate price            
+            //Validate price
+            if (price < 0)
+            {
+                _errors.SetError(_txtPrice, "Price must be >= 0.");
+            }
+
             return -1;
-        }                      
+        }
+
+        private void DisplayError ( string message, string title )
+        {
+            MessageBox.Show(this, message, title, MessageBoxButtons.OK, MessageBoxIcon.Error);
+        }
         #endregion
     }
 }

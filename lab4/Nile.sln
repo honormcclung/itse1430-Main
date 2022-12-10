@@ -1,12 +1,14 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.26403.7
+# Visual Studio Version 17
+VisualStudioVersion = 17.3.32825.248
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nile.Windows", "Nile.Windows\Nile.Windows.csproj", "{8F5366FA-58D9-4DD3-89C7-66975A72F676}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Nile.Windows", "Nile.Windows\Nile.Windows.csproj", "{8F5366FA-58D9-4DD3-89C7-66975A72F676}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nile", "Nile\Nile.csproj", "{93BD7A37-01A9-498D-8479-67BEF715EA20}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Nile", "Nile\Nile.csproj", "{93BD7A37-01A9-498D-8479-67BEF715EA20}"
 EndProject
 Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "NileDatabase", "NileDatabase\NileDatabase.sqlproj", "{56C0ADF1-90E3-4E66-998C-20FE50D88A2D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nile.Stores.Sql", "Nile.Stores.Sql\Nile.Stores.Sql.csproj", "{92181C7C-0CE1-47BB-B323-4597F5A7BC93}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -28,6 +30,10 @@ Global
 		{56C0ADF1-90E3-4E66-998C-20FE50D88A2D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{56C0ADF1-90E3-4E66-998C-20FE50D88A2D}.Release|Any CPU.Build.0 = Release|Any CPU
 		{56C0ADF1-90E3-4E66-998C-20FE50D88A2D}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{92181C7C-0CE1-47BB-B323-4597F5A7BC93}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{92181C7C-0CE1-47BB-B323-4597F5A7BC93}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{92181C7C-0CE1-47BB-B323-4597F5A7BC93}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{92181C7C-0CE1-47BB-B323-4597F5A7BC93}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
